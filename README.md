@@ -1,2 +1,2 @@
 # arduino-project
-Arduino Project
+Arduino Project for circuits
