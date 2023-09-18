@@ -10,6 +10,7 @@
 
 -   [Overview](#overview)
     -   [Built With](#built-with)
+-   [Installation and Execution](#installation-and-execution)
 -   [Contact](#contact)
 
 <!-- OVERVIEW -->
@@ -28,6 +29,20 @@ Website where the development process of various projects carried out with Ardui
 -   [React](https://react.dev/)
 -   [Astro](https://astro.build/)
 -   [Arduino](https://www.arduino.cc/)
+
+## Installation and Execution
+
+Install dependencies:
+
+```
+npm install
+```
+
+Run the project:
+
+```
+npm run dev
+```
 
 ## Contact
 
