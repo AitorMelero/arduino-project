@@ -1,0 +1,27 @@
+---
+import { Footer, Header, Sidebar } from "../components";
+
+const { pageTitle } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="bg-gray-800 font-sans">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+    </head>
+    <body>
+        <Header client:load />
+
+        <Sidebar client:load position={"left"} />
+
+        <Sidebar client:load position={"right"} />
+
+        <Footer />
+        <!-- <slot /> -->
+    </body>
+</html>
