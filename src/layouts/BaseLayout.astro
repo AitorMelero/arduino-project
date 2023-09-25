@@ -22,8 +22,9 @@ const allPosts = await Astro.glob("../pages/posts/*.md");
             <Sidebar client:only="react" allPosts={allPosts} />
 
             <div class="flex flex-col content-between w-full h-full">
-                <!-- <article class="h-full">Hello World</article> -->
-                <slot />
+                <article class="h-full text-white">
+                    <slot />
+                </article>
                 <Footer client:only="react" />
             </div>
 
