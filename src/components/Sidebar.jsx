@@ -1,4 +1,4 @@
-export const Sidebar = ({ allPosts }) => {
+export const Sidebar = ({ allReferences = [] }) => {
     const articles = [
         {
             id: "project-1",
@@ -18,9 +18,9 @@ export const Sidebar = ({ allPosts }) => {
 
     return (
         <aside className={asideClass}>
-            {allPosts.map((post) => (
+            {allReferences.map((post) => (
                 <a href={post.url} key={post.url}>
-                    {post.frontmatter.title}
+                    {post.title}
                 </a>
             ))}
         </aside>
