@@ -15,7 +15,7 @@ const { pageTitle } = Astro.props;
         <title>{pageTitle}</title>
     </head>
     <body class="h-full">
-        <Header client:only="react" />
+        <Header client:only="react" pageTitle={pageTitle} />
 
         <main class="flex flex-row justify-between w-full h-full">
             <Sidebar client:only="react" />
