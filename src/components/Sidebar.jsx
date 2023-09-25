@@ -1,4 +1,4 @@
-export const Sidebar = ({ position }) => {
+export const Sidebar = ({ position = "left" }) => {
     const articles = [
         {
             id: "project-1",
@@ -13,18 +13,16 @@ export const Sidebar = ({ position }) => {
             title: "Project 3",
         },
     ];
+    const asideClass =
+        "flex flex-col border border-white h-full w-80 text-white";
 
     return (
-        <>
-            <aside
-                className={`flex flex-col border border-white h-full text-white fixed w-80 ${position}-0`}
-            >
-                {articles.map(({ id, title }) => (
-                    <a href={`#${id}`} key={id}>
-                        {title}
-                    </a>
-                ))}
-            </aside>
-        </>
+        <aside className={asideClass}>
+            {articles.map(({ id, title }) => (
+                <a href={`#${id}`} key={id}>
+                    {title}
+                </a>
+            ))}
+        </aside>
     );
 };
