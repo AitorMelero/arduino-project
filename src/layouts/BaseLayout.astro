@@ -5,7 +5,7 @@ const { pageTitle } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="bg-gray-800 font-sans">
+<html lang="en" class="bg-gray-800 font-sans h-full">
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content="Astro description" />
@@ -14,14 +14,20 @@ const { pageTitle } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
     </head>
-    <body>
-        <Header client:load />
+    <body class="h-full">
+        <Header client:only="react" />
 
-        <Sidebar client:load position={"left"} />
+        <main class="flex flex-row justify-between w-full h-full">
+            <Sidebar client:only="react" />
 
-        <Sidebar client:load position={"right"} />
+            <div class="flex flex-col content-between w-full h-full">
+                <article class="h-full">Hello World</article>
+                <Footer client:only="react" />
+            </div>
 
-        <Footer />
+            <Sidebar client:only="react" />
+        </main>
+
         <!-- <slot /> -->
     </body>
 </html>
