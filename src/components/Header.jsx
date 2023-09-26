@@ -2,7 +2,7 @@ import { ButtonHeader } from "./ButtonHeader";
 
 export const Header = ({ pageTitle = "Arduino Project" }) => {
     return (
-        <header className="text-white border border-white sticky h-24 flex flex-row justify-between">
+        <header className="bg-gray-800 text-white border border-white sticky top-0 h-24 flex flex-row justify-between">
             <h1 className="flex items-center text-4xl text-center">
                 {pageTitle}
             </h1>
