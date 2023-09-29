@@ -24,21 +24,43 @@ const postsReferences = allPosts.find((post) => post.url === pathname)
         <title>{pageTitle}</title>
     </head>
     <body class="h-full bg-white dark:bg-gray-1 text-gray-2 dark:text-white">
-        <Header client:only="react" pageTitle={pageTitle} />
+        <Header client:load pageTitle={pageTitle} />
 
-        <main
-            class="flex flex-row justify-between w-full h-[calc(100vh-6rem)]"
-        >
-            <Sidebar client:only="react" allReferences={allPostsReferences} />
+        <main class="flex flex-row justify-between w-full h-[calc(100vh-6rem)]">
+            <Sidebar client:load allReferences={allPostsReferences} />
 
             <div class="flex flex-col content-between w-full h-full">
                 <article class="h-full">
                     <slot />
                 </article>
-                <Footer client:only="react" />
+                <Footer client:load />
             </div>
 
-            <Sidebar client:only="react" allReferences={postsReferences} />
+            <Sidebar client:load allReferences={postsReferences} />
         </main>
     </body>
 </html>
+
+<script is:inline>
+// Load the theme
+const theme = (() => {
+    if (
+        typeof localStorage !== "undefined" &&
+        localStorage.getItem("theme")
+    ) {
+        return localStorage.getItem("theme");
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+    }
+    return "light";
+})();
+
+if (theme === "light") {
+    document.documentElement.classList.remove("dark");
+} else {
+    document.documentElement.classList.add("dark");
+}
+
+window.localStorage.setItem("theme", theme);
+</script>
