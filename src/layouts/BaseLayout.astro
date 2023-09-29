@@ -1,0 +1,42 @@
+---
+import { Footer, Header, Sidebar } from "../components";
+
+const { pageTitle } = Astro.props;
+const allPosts = await Astro.glob("../pages/posts/*.md");
+const { pathname } = Astro.url; // current pathname
+
+const allPostsReferences = allPosts.map((post) => ({
+    url: post.url,
+    title: post.frontmatter.title,
+}));
+const postsReferences = allPosts.find((post) => post.url === pathname)
+    ?.frontmatter.sections;
+---
+
+<!doctype html>
+<html lang="en" class="bg-gray-800 font-sans h-full">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+    </head>
+    <body class="h-full">
+        <Header client:only="react" pageTitle={pageTitle} />
+
+        <main class="flex flex-row justify-between w-full h-full">
+            <Sidebar client:only="react" allReferences={allPostsReferences} />
+
+            <div class="flex flex-col content-between w-full h-full">
+                <article class="h-full text-white">
+                    <slot />
+                </article>
+                <Footer client:only="react" />
+            </div>
+
+            <Sidebar client:only="react" allReferences={postsReferences} />
+        </main>
+    </body>
+</html>
