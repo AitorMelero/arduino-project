@@ -6,8 +6,9 @@ module.exports = {
         colors: {
             transparent: "transparent",
             current: "currentColor",
-            primary: "#ffffff",
-            "primary-dark": "#23272f",
+            white: "#ffffff",
+            "gray-1": "#23272f",
+            "gray-2": "#1c1e21"
         },
     },
     plugins: [],
