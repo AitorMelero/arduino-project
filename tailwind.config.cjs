@@ -8,7 +8,12 @@ module.exports = {
             current: "currentColor",
             white: "#ffffff",
             "gray-1": "#23272f",
-            "gray-2": "#1c1e21"
+            "gray-2": "#1c1e21",
+            "gray-3": "rgba(52, 58, 70, 0.8)",
+            "gray-4": "rgba(235, 236, 240, 0.8)",
+            "gray-5": "rgba(64, 71, 86, 1)",
+            blue: "rgb(20, 158, 202)",
+            "blue-2": "rgba(20, 158, 202, 0.1)",
         },
     },
     plugins: [],
