@@ -24,7 +24,11 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
                     <IconSun className="hidden dark:block" />
                     <IconMoon className="block dark:hidden" />
                 </button>
-                <a href="#" className="mx-10">
+                <a
+                    href="https://github.com/AitorMelero/arduino-project"
+                    target="_blank"
+                    className="mx-10"
+                >
                     <IconBrandGithubFilled />
                 </a>
             </div>
