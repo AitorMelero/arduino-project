@@ -1,6 +1,6 @@
 # Lista de requisitos funcionales de la aplicación
 
-En el MVP de la aplicación deben desarrollarse los puntos de la siguiente lista:
+En el **MVP** de la aplicación deben desarrollarse los puntos de la siguiente lista:
 
 -   La aplicación debe de tener un menú de navegación por artículos a la izquierda.
 -   La aplicación debe de tener un menú de navegación por apartados dentro de un mismo artículo en la parte derecha.
