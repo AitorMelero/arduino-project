@@ -8,8 +8,13 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
             </h1>
             <div className="flex flex-row justify-center items-center">
                 <ButtonHeader textButton="About" />
-                <ButtonHeader textButton="Mode" />
-                <ButtonHeader textButton="GitHub" />
+                <a href="#" className="mx-10">
+                    <i class="ti ti-sun"></i>
+                    {/* <i class="ti ti-moon"></i> */}
+                </a>
+                <a href="#" className="mx-10">
+                    <i class="ti ti-brand-github-filled"></i>
+                </a>
             </div>
         </header>
     );
