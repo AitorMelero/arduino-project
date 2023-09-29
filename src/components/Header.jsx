@@ -20,7 +20,11 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
             </h1>
             <div className="flex flex-row justify-center items-center">
                 <ButtonHeader textButton="About" />
-                <ButtonHeader textButton="Projects" isSelected={true} />
+                <ButtonHeader
+                    textButton="Projects"
+                    isSelected={true}
+                    pathURL="../"
+                />
                 <button className="mx-10" onClick={handleToggleModeDark}>
                     <IconSun className="hidden dark:block" />
                     <IconMoon className="block dark:hidden" />
