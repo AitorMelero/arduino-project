@@ -1,3 +1,5 @@
+import { IconBrandGithubFilled, IconMoon, IconSun } from "@tabler/icons-react";
+
 import { ButtonHeader } from "./ButtonHeader";
 
 export const Header = ({ pageTitle = "Arduino Project" }) => {
@@ -9,11 +11,11 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
             <div className="flex flex-row justify-center items-center">
                 <ButtonHeader textButton="About" />
                 <a href="#" className="mx-10">
-                    <i class="ti ti-sun"></i>
-                    {/* <i class="ti ti-moon"></i> */}
+                    <IconSun />
+                    {/* <IconMoon /> */}
                 </a>
                 <a href="#" className="mx-10">
-                    <i class="ti ti-brand-github-filled"></i>
+                    <IconBrandGithubFilled />
                 </a>
             </div>
         </header>
