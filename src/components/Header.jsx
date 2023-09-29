@@ -3,6 +3,9 @@ import { IconBrandGithubFilled, IconMoon, IconSun } from "@tabler/icons-react";
 import { ButtonHeader } from "./ButtonHeader";
 
 export const Header = ({ pageTitle = "Arduino Project" }) => {
+    const hoverStyle =
+        "mx-10 text-base rounded-full p-3 hover:bg-gray-4 hover:dark:bg-gray-3";
+
     // Change the theme
     const handleToggleModeDark = () => {
         const element = document.documentElement;
@@ -19,20 +22,20 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
                 {pageTitle}
             </h1>
             <div className="flex flex-row justify-center items-center">
-                <ButtonHeader textButton="About" />
+                <ButtonHeader textButton="About" pathURL="./about" />
                 <ButtonHeader
                     textButton="Projects"
                     isSelected={true}
                     pathURL="../"
                 />
-                <button className="mx-10" onClick={handleToggleModeDark}>
+                <button className={hoverStyle} onClick={handleToggleModeDark}>
                     <IconSun className="hidden dark:block" />
                     <IconMoon className="block dark:hidden" />
                 </button>
                 <a
                     href="https://github.com/AitorMelero/arduino-project"
                     target="_blank"
-                    className="mx-10"
+                    className={hoverStyle}
                 >
                     <IconBrandGithubFilled />
                 </a>
