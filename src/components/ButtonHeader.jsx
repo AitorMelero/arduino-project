@@ -2,6 +2,7 @@ export const ButtonHeader = ({
     textButton = "Button",
     isSelected = false,
     pathURL = "#",
+    stylesClasses = ""
 }) => {
     const classIsSelected = isSelected
         ? "bg-blue-2 text-blue"
@@ -11,7 +12,7 @@ export const ButtonHeader = ({
         <a
             href={pathURL}
             className={
-                "mx-10 text-base rounded-full px-3 py-2 " + classIsSelected
+                stylesClasses + "px-3 py-2 " + classIsSelected
             }
         >
             {textButton}
