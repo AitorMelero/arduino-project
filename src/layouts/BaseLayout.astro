@@ -23,7 +23,7 @@ const postsReferences = allPosts.find((post) => post.url === pathname)
         <meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
     </head>
-    <body class="h-full">
+    <body class="h-full bg-primary dark:bg-primary-dark">
         <Header client:only="react" pageTitle={pageTitle} />
 
         <main class="flex flex-row justify-between w-full h-full">
