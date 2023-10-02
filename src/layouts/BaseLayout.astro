@@ -63,4 +63,20 @@ if (theme === "light") {
 }
 
 window.localStorage.setItem("theme", theme);
+
+const pathname = window.location.pathname.replace("/", "");
+const aboutButton = document.getElementById("about");
+const projectsButton = document.getElementById("projects");
+const buttonGeneralStyle = "mx-5 text-base rounded-full px-3 py-2 ";
+const classIsSelected = buttonGeneralStyle + "bg-blue-2 text-blue";
+const classIsNotSelected =
+    buttonGeneralStyle + "hover:bg-gray-4 hover:dark:bg-gray-3";
+
+if (pathname === "about") {
+    aboutButton.className = classIsSelected;
+    projectsButton.className = classIsNotSelected;
+} else {
+    projectsButton.className = classIsSelected;
+    aboutButton.className = classIsNotSelected;
+}
 </script>

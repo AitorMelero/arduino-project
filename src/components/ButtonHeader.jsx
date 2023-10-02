@@ -1,20 +1,6 @@
-export const ButtonHeader = ({
-    textButton = "Button",
-    isSelected = false,
-    pathURL = "#",
-    stylesClasses = ""
-}) => {
-    const classIsSelected = isSelected
-        ? "bg-blue-2 text-blue"
-        : "hover:bg-gray-4 hover:dark:bg-gray-3";
-
+export const ButtonHeader = ({ id, textButton = "Button", pathURL = "#" }) => {
     return (
-        <a
-            href={pathURL}
-            className={
-                stylesClasses + "px-3 py-2 " + classIsSelected
-            }
-        >
+        <a id={id} href={pathURL}>
             {textButton}
         </a>
     );

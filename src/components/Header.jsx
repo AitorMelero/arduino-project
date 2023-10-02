@@ -23,15 +23,10 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
                 {pageTitle}
             </h1>
             <div className="flex flex-row justify-center items-center">
+                <ButtonHeader id="about" textButton="About" pathURL="./about" />
                 <ButtonHeader
-                    stylesClasses={buttonGeneralStyle}
-                    textButton="About"
-                    pathURL="./about"
-                />
-                <ButtonHeader
-                    stylesClasses={buttonGeneralStyle}
+                    id="projects"
                     textButton="Projects"
-                    isSelected={true}
                     pathURL="../"
                 />
                 <button
