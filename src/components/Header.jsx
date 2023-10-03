@@ -1,14 +1,18 @@
+import { useState } from "react";
 import {
     IconBrandGithubFilled,
     IconMenu2,
     IconMoon,
     IconSun,
+    IconX,
 } from "@tabler/icons-react";
 
 import { ArduinoLogo } from "./ArduinoLogo";
 import { ButtonHeader } from "./ButtonHeader";
 
 export const Header = ({ pageTitle = "Arduino Project" }) => {
+    const [menuIsOpen, setMenuIsOpen] = useState(false);
+
     const transitionClass = "transform active:scale-95 transition-transform ";
     const buttonGeneralStyle = "mx-5 text-base rounded-full " + transitionClass;
     const buttonLinkDynamicStyle = buttonGeneralStyle + "hidden lg:block ";
@@ -26,11 +30,20 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
         localStorage.setItem("theme", mainTheme);
     };
 
+    // Open or close burguer menu
+    const handleToggleMenu = () => {
+        setMenuIsOpen(!menuIsOpen);
+    };
+
     return (
         <header className="border border-gray-2 dark:border-white sticky top-0 h-24 flex flex-row justify-between">
             <div className="flex flex-row justify-center items-center">
-                <button className={menuBurguerStyle}>
-                    <IconMenu2 />
+                <button className={menuBurguerStyle} onClick={handleToggleMenu}>
+                    {menuIsOpen ? (
+                        <IconX color="rgb(20, 158, 202)" />
+                    ) : (
+                        <IconMenu2 />
+                    )}
                 </button>
             </div>
             <ArduinoLogo />
