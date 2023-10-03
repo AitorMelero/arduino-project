@@ -3,7 +3,8 @@ import { IconBrandGithubFilled, IconMoon, IconSun } from "@tabler/icons-react";
 import { ButtonHeader } from "./ButtonHeader";
 
 export const Header = ({ pageTitle = "Arduino Project" }) => {
-    const buttonGeneralStyle = "mx-5 text-base rounded-full ";
+    const transitionClass = "transform active:scale-95 transition-transform ";
+    const buttonGeneralStyle = "mx-5 text-base rounded-full " + transitionClass;
     const hoverIconStyle =
         buttonGeneralStyle + "p-3 hover:bg-gray-4 hover:dark:bg-gray-3 ";
 
