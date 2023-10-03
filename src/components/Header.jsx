@@ -6,6 +6,7 @@ import { ButtonHeader } from "./ButtonHeader";
 export const Header = ({ pageTitle = "Arduino Project" }) => {
     const transitionClass = "transform active:scale-95 transition-transform ";
     const buttonGeneralStyle = "mx-5 text-base rounded-full " + transitionClass;
+    const buttonLinkDynamicStyle = buttonGeneralStyle + "hidden lg:block ";
     const hoverIconStyle =
         buttonGeneralStyle + "p-3 hover:bg-gray-4 hover:dark:bg-gray-3 ";
 
@@ -22,7 +23,7 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
     return (
         <header className="border border-gray-2 dark:border-white sticky top-0 h-24 flex flex-row justify-between">
             <ArduinoLogo />
-            <h1 className="flex grow items-center text-4xl text-center">
+            <h1 className="hidden sm:flex grow items-center text-4xl text-center">
                 {pageTitle}
             </h1>
             <div className="flex flex-row justify-center items-center">
@@ -30,13 +31,13 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
                     id="projects"
                     textButton="Projects"
                     pathURL="/"
-                    generalStyles={buttonGeneralStyle}
+                    generalStyles={buttonLinkDynamicStyle}
                 />
                 <ButtonHeader
                     id="about"
                     textButton="About"
                     pathURL="/about"
-                    generalStyles={buttonGeneralStyle}
+                    generalStyles={buttonLinkDynamicStyle}
                 />
                 <button
                     className={hoverIconStyle}
