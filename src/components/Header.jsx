@@ -23,11 +23,17 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
                 {pageTitle}
             </h1>
             <div className="flex flex-row justify-center items-center">
-                <ButtonHeader id="about" textButton="About" pathURL="./about" />
                 <ButtonHeader
                     id="projects"
                     textButton="Projects"
-                    pathURL="../"
+                    pathURL="/"
+                    generalStyles={buttonGeneralStyle}
+                />
+                <ButtonHeader
+                    id="about"
+                    textButton="About"
+                    pathURL="/about"
+                    generalStyles={buttonGeneralStyle}
                 />
                 <button
                     className={hoverIconStyle}
