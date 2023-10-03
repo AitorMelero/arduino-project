@@ -32,6 +32,19 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
 
     // Open or close burguer menu
     const handleToggleMenu = () => {
+        const mainContainer = document.getElementById("main-content");
+        const menuContainer = document.getElementById("menu-content");
+        const mainStyle = "flex flex-col content-between w-full h-full";
+        const menuStyle = "flex flex-col w-full h-[calc(100vh-6rem)]";
+
+        if (menuIsOpen) {
+            menuContainer.className = "hidden";
+            mainContainer.className = mainStyle;
+        } else {
+            mainContainer.className = "hidden";
+            menuContainer.className = menuStyle;
+        }
+
         setMenuIsOpen(!menuIsOpen);
     };
 
