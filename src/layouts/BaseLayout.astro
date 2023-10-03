@@ -26,7 +26,10 @@ const postsReferences = allPosts.find((post) => post.url === pathname)
     <body class="h-full bg-white dark:bg-gray-1 text-gray-2 dark:text-white">
         <Header client:load pageTitle={pageTitle} />
 
-        <main class="flex flex-row justify-between w-full h-[calc(100vh-6rem)]">
+        <main
+            id="main-content"
+            class="flex flex-row justify-between w-full h-[calc(100vh-6rem)]"
+        >
             <Sidebar client:load allReferences={allPostsReferences} />
 
             <div class="flex flex-col content-between w-full h-full">
@@ -38,6 +41,8 @@ const postsReferences = allPosts.find((post) => post.url === pathname)
 
             <Sidebar client:load allReferences={postsReferences} />
         </main>
+
+        <main id="menu-content" class="hidden"></main>
     </body>
 </html>
 
