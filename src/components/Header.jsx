@@ -1,5 +1,6 @@
 import { IconBrandGithubFilled, IconMoon, IconSun } from "@tabler/icons-react";
 
+import { ArduinoLogo } from "./ArduinoLogo";
 import { ButtonHeader } from "./ButtonHeader";
 
 export const Header = ({ pageTitle = "Arduino Project" }) => {
@@ -20,7 +21,8 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
 
     return (
         <header className="border border-gray-2 dark:border-white sticky top-0 h-24 flex flex-row justify-between">
-            <h1 className="flex items-center text-4xl text-center">
+            <ArduinoLogo />
+            <h1 className="flex grow items-center text-4xl text-center">
                 {pageTitle}
             </h1>
             <div className="flex flex-row justify-center items-center">
