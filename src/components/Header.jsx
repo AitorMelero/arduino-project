@@ -16,7 +16,7 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
             <BurgerButton classStyles={menuBurguerStyle} />
 
             <ArduinoLogo />
-            <h1 className="hidden sm:flex grow items-center text-4xl text-center">
+            <h1 className="hidden sm:flex grow items-center text-4xl text-center font-medium">
                 {pageTitle}
             </h1>
 
