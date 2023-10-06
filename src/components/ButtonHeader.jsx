@@ -6,7 +6,9 @@ export const ButtonHeader = ({
     generalStyles = "",
 }) => {
     const id = textButton.toLowerCase();
-    const transitionClass = "transform active:scale-95 transition-transform ";
+    const fontClass = "font-medium ";
+    const transitionClass =
+        fontClass + "transform active:scale-95 transition-transform ";
     const isSelectedClass =
         transitionClass + generalStyles + "px-3 py-2 bg-blue-2 text-blue";
     const isNotSelectedClass =
