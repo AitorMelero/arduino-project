@@ -1,153 +1,45 @@
-import { useEffect, useState } from "react";
-import {
-    IconBrandGithubFilled,
-    IconMenu2,
-    IconMoon,
-    IconSun,
-    IconX,
-} from "@tabler/icons-react";
-
+import { IconBrandGithubFilled } from "@tabler/icons-react";
 import { ArduinoLogo, ButtonHeader } from "./";
+import { ThemeButton } from "./ThemeButton";
+import { BurgerButton } from "./BurgerButton";
 
 export const Header = ({ pageTitle = "Arduino Project" }) => {
-    const [menuIsOpen, setMenuIsOpen] = useState(false);
-
-    const transitionClass = "transform active:scale-95 transition-transform ";
-    const buttonGeneralStyle = "mx-5 text-base rounded-full " + transitionClass;
+    // Buttons styles
+    const buttonGeneralStyle = "mx-5 text-base rounded-full ";
     const buttonLinkDynamicStyle = buttonGeneralStyle + "hidden lg:block ";
     const hoverIconStyle =
         buttonGeneralStyle + "p-3 hover:bg-gray-4 hover:dark:bg-gray-3 ";
-    const menuBurguerStyle = hoverIconStyle + "lg:hidden ";
-
-    useEffect(() => {
-        // Función que actualiza el estado con el tamaño actual de la ventana.
-        const updateWindowSize = () => {
-            /* setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            }); */
-            if (window.innerWidth >= 1024) {
-                const mainContainer = document.getElementById("main-content");
-                const menuContainer = document.getElementById("menu-content");
-                const mainStyle =
-                    "flex flex-row justify-between w-full h-[calc(100vh-6rem)]";
-
-                menuContainer.className = "hidden";
-                mainContainer.className = mainStyle;
-                setMenuIsOpen(false);
-            }
-        };
-
-        // Agregar un event listener para el evento 'resize'.
-        window.addEventListener("resize", updateWindowSize);
-
-        // Retirar el event listener cuando el componente se desmonte.
-        return () => {
-            window.removeEventListener("resize", updateWindowSize);
-        };
-    }, []);
-
-    // Change the theme
-    const handleToggleModeDark = () => {
-        const element = document.documentElement;
-        element.classList.toggle("dark");
-
-        const isDark = element.classList.contains("dark");
-        const mainTheme = isDark ? "dark" : "light";
-        localStorage.setItem("theme", mainTheme);
-    };
-
-    // Open or close burguer menu
-    const handleToggleMenu = () => {
-        const mainContainer = document.getElementById("main-content");
-        const menuContainer = document.getElementById("menu-content");
-        // const mainStyle = "flex flex-col content-between w-full h-full";
-        const mainStyle =
-            "flex flex-row justify-between w-full h-[calc(100vh-6rem)]";
-        const mainhiddenStyle =
-            "hidden lg:flex lg:flex-lg:col lg:content-between lg:w-full lg:h-full";
-        const menuStyle = "flex flex-col w-full h-[calc(100vh-6rem)] lg:hidden";
-
-        if (menuIsOpen) {
-            menuContainer.className = "hidden";
-            mainContainer.className = mainStyle;
-        } else {
-            mainContainer.className = mainhiddenStyle;
-            menuContainer.className = menuStyle;
-        }
-
-        setMenuIsOpen(!menuIsOpen);
-    };
+    const menuBurguerStyle = hoverIconStyle + "self-center lg:hidden ";
 
     return (
-        <>
-            <header className="shadow-[0_16px_32px_-16px_rgba(0,0,0,.1),0_0_0_1px_rgba(0,0,0,.1)] dark:shadow-[0_16px_32px_-16px_rgba(0,0,0,.1),0_0_0_1px_hsla(0,0%,100%,.05)] sticky top-0 h-24 flex flex-row justify-between">
-                <div className="flex flex-row justify-center items-center">
-                    <button
-                        className={menuBurguerStyle}
-                        onClick={handleToggleMenu}
-                    >
-                        {menuIsOpen ? (
-                            <IconX color="rgb(20, 158, 202)" />
-                        ) : (
-                            <IconMenu2 />
-                        )}
-                    </button>
-                </div>
-                <ArduinoLogo />
-                <h1 className="hidden sm:flex grow items-center text-4xl text-center">
-                    {pageTitle}
-                </h1>
-                <div className="flex flex-row justify-center items-center">
-                    <ButtonHeader
-                        id="projects"
-                        textButton="Projects"
-                        pathURL="/"
-                        generalStyles={buttonLinkDynamicStyle}
-                    />
-                    <ButtonHeader
-                        id="about"
-                        textButton="About"
-                        pathURL="/about"
-                        generalStyles={buttonLinkDynamicStyle}
-                    />
-                    <button
-                        className={hoverIconStyle}
-                        onClick={handleToggleModeDark}
-                    >
-                        <IconSun className="hidden dark:block" />
-                        <IconMoon className="block dark:hidden" />
-                    </button>
-                    <a
-                        href="https://github.com/AitorMelero/arduino-project"
-                        target="_blank"
-                        className={hoverIconStyle}
-                    >
-                        <IconBrandGithubFilled />
-                    </a>
-                </div>
-            </header>
+        <header className="shadow-[0_16px_32px_-16px_rgba(0,0,0,.1),0_0_0_1px_rgba(0,0,0,.1)] dark:shadow-[0_16px_32px_-16px_rgba(0,0,0,.1),0_0_0_1px_hsla(0,0%,100%,.05)] sticky top-0 h-24 flex flex-row justify-between">
+            <BurgerButton classStyles={menuBurguerStyle} />
 
-            {/* {menuIsOpen ? (
-                <main id="menu-content" className="block lg:hidden">
-                    <header className="pt-4 flex flex-row justify-around">
-                        <ButtonHeader
-                            id="projects"
-                            textButton="Projects"
-                            pathURL="/"
-                            generalStyles={buttonMenuStyle}
-                        />
-                        <ButtonHeader
-                            id="about"
-                            textButton="About"
-                            pathURL="/about"
-                            generalStyles={buttonMenuStyle}
-                        />
-                    </header>
-                </main>
-            ) : (
-                <></>
-            )} */}
-        </>
+            <ArduinoLogo />
+            <h1 className="hidden sm:flex grow items-center text-4xl text-center">
+                {pageTitle}
+            </h1>
+
+            <div className="flex flex-row justify-center items-center">
+                <ButtonHeader
+                    textButton="Projects"
+                    pathURL="/"
+                    generalStyles={buttonLinkDynamicStyle}
+                />
+                <ButtonHeader
+                    textButton="About"
+                    pathURL="/about"
+                    generalStyles={buttonLinkDynamicStyle}
+                />
+                <ThemeButton classStyles={hoverIconStyle} />
+                <a
+                    href="https://github.com/AitorMelero/arduino-project"
+                    target="_blank"
+                    className={hoverIconStyle}
+                >
+                    <IconBrandGithubFilled />
+                </a>
+            </div>
+        </header>
     );
 };
