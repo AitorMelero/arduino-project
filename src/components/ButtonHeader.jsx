@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 
 export const ButtonHeader = ({
-    id,
     textButton = "Button",
     pathURL = "#",
     generalStyles = "",
 }) => {
-    const isSelectedClass = generalStyles + "px-3 py-2 bg-blue-2 text-blue";
+    const id = textButton.toLowerCase();
+    const transitionClass = "transform active:scale-95 transition-transform ";
+    const isSelectedClass =
+        transitionClass + generalStyles + "px-3 py-2 bg-blue-2 text-blue";
     const isNotSelectedClass =
-        generalStyles + "px-3 py-2 hover:bg-gray-4 hover:dark:bg-gray-3";
+        transitionClass +
+        generalStyles +
+        "px-3 py-2 hover:bg-gray-4 hover:dark:bg-gray-3";
     const [classStyles, setClassStyles] = useState(isNotSelectedClass);
 
     useEffect(() => {

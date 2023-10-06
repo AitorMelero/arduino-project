@@ -13,10 +13,7 @@ const postsReferences = allPosts.find((post) => post.url === pathname)
     ?.frontmatter.sections;
 
 // Header buttons styles
-const transitionClass = "transform active:scale-95 transition-transform ";
-const buttonGeneralStyle =
-    "w-40 text-center text-base rounded-full " + transitionClass;
-// const buttonLinkDynamicStyle = buttonGeneralStyle + "hidden lg:block ";
+const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
 ---
 
 <!doctype html>
@@ -52,43 +49,21 @@ const buttonGeneralStyle =
             <header class="pt-4 flex flex-row justify-around">
                 <ButtonHeader
                     client:load
-                    id="projects"
                     textButton="Projects"
                     pathURL="/"
                     generalStyles={buttonGeneralStyle}
                 />
                 <ButtonHeader
                     client:load
-                    id="about"
                     textButton="About"
                     pathURL="/about"
                     generalStyles={buttonGeneralStyle}
                 />
             </header>
         </main>
+
+        <script>
+            import "../scripts/theme.js";
+        </script>
     </body>
 </html>
-
-<script is:inline>
-// Load the theme
-const theme = (() => {
-    if (
-        typeof localStorage !== "undefined" &&
-        localStorage.getItem("theme")
-    ) {
-        return localStorage.getItem("theme");
-    }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        return "dark";
-    }
-    return "light";
-})();
-
-if (theme === "light") {
-    document.documentElement.classList.remove("dark");
-} else {
-    document.documentElement.classList.add("dark");
-}
-
-window.localStorage.setItem("theme", theme);
-</script>
