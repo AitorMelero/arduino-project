@@ -49,7 +49,7 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
     };
 
     return (
-        <header className="border border-gray-2 dark:border-white sticky top-0 h-24 flex flex-row justify-between">
+        <header className="shadow-[0_16px_32px_-16px_rgba(0,0,0,.1),0_0_0_1px_rgba(0,0,0,.1)] dark:shadow-[0_16px_32px_-16px_rgba(0,0,0,.1),0_0_0_1px_hsla(0,0%,100%,.05)] sticky top-0 h-24 flex flex-row justify-between">
             <div className="flex flex-row justify-center items-center">
                 <button className={menuBurguerStyle} onClick={handleToggleMenu}>
                     {menuIsOpen ? (
