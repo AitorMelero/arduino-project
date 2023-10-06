@@ -34,13 +34,15 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
         const mainContainer = document.getElementById("main-content");
         const menuContainer = document.getElementById("menu-content");
         const mainStyle = "flex flex-col content-between w-full h-full";
-        const menuStyle = "flex flex-col w-full h-[calc(100vh-6rem)]";
+        const mainhiddenStyle =
+            "hidden lg:flex lg:flex-lg:col lg:content-between lg:w-full lg:h-full";
+        const menuStyle = "flex flex-col w-full h-[calc(100vh-6rem)] lg:hidden";
 
         if (menuIsOpen) {
             menuContainer.className = "hidden";
             mainContainer.className = mainStyle;
         } else {
-            mainContainer.className = "hidden";
+            mainContainer.className = mainhiddenStyle;
             menuContainer.className = menuStyle;
         }
 
