@@ -1,6 +1,6 @@
 export const Footer = () => {
     return (
-        <footer className="text-white border border-white h-24">
+        <footer className="border border-gray-2 dark:border-white h-24">
             <h1>Footer</h1>
         </footer>
     );

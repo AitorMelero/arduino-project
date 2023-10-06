@@ -1,20 +1,6 @@
 export const Sidebar = ({ allReferences = [] }) => {
-    const articles = [
-        {
-            id: "project-1",
-            title: "Project 1",
-        },
-        {
-            id: "project-2",
-            title: "Project 2",
-        },
-        {
-            id: "project-3",
-            title: "Project 3",
-        },
-    ];
     const asideClass =
-        "flex flex-col border border-white h-full w-80 text-white";
+        "flex flex-col border border-gray-2 dark:border-white h-full w-80";
 
     return (
         <aside className={asideClass}>
