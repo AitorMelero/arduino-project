@@ -7,8 +7,7 @@ import {
     IconX,
 } from "@tabler/icons-react";
 
-import { ArduinoLogo } from "./ArduinoLogo";
-import { ButtonHeader } from "./ButtonHeader";
+import { ArduinoLogo, ButtonHeader } from "./";
 
 export const Header = ({ pageTitle = "Arduino Project" }) => {
     const [menuIsOpen, setMenuIsOpen] = useState(false);

@@ -2,8 +2,8 @@ export const ArduinoLogo = () => {
     return (
         <div className="flex grow sm:grow-0 items-center text-center mx-5">
             <svg
-                width="40"
-                height="40"
+                width="55"
+                height="55"
                 viewBox="0 0 52 25"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
