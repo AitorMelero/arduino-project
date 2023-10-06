@@ -1,5 +1,5 @@
 ---
-import { Footer, Header, Sidebar } from "../components";
+import { ButtonHeader, Footer, Header, Sidebar } from "../components";
 
 const { pageTitle } = Astro.props;
 const allPosts = await Astro.glob("../pages/posts/*.md");
@@ -11,6 +11,12 @@ const allPostsReferences = allPosts.map((post) => ({
 }));
 const postsReferences = allPosts.find((post) => post.url === pathname)
     ?.frontmatter.sections;
+
+// Header buttons styles
+const transitionClass = "transform active:scale-95 transition-transform ";
+const buttonGeneralStyle =
+    "w-40 text-center text-base rounded-full " + transitionClass;
+// const buttonLinkDynamicStyle = buttonGeneralStyle + "hidden lg:block ";
 ---
 
 <!doctype html>
@@ -42,7 +48,24 @@ const postsReferences = allPosts.find((post) => post.url === pathname)
             <Sidebar client:load allReferences={postsReferences} />
         </main>
 
-        <main id="menu-content" class="hidden"></main>
+        <main id="menu-content" class="hidden">
+            <header class="pt-4 flex flex-row justify-around">
+                <ButtonHeader
+                    client:load
+                    id="projects"
+                    textButton="Projects"
+                    pathURL="/"
+                    generalStyles={buttonGeneralStyle}
+                />
+                <ButtonHeader
+                    client:load
+                    id="about"
+                    textButton="About"
+                    pathURL="/about"
+                    generalStyles={buttonGeneralStyle}
+                />
+            </header>
+        </main>
     </body>
 </html>
 
