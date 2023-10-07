@@ -1,11 +1,10 @@
-export const Sidebar = ({ allReferences = [], classStyles = "" }) => {
+import { SectionLink } from "./SectionLink";
 
+export const Sidebar = ({ allReferences = [], classStyles = "" }) => {
     return (
         <aside className={classStyles}>
-            {allReferences.map((post) => (
-                <a href={post.url} key={post.url}>
-                    {post.title}
-                </a>
+            {allReferences.map(({ url, title }) => (
+                <SectionLink key={url} urlPost={url} titlePost={title} />
             ))}
         </aside>
     );
