@@ -31,9 +31,9 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
 
         <main
             id="main-content"
-            class="flex flex-row justify-between w-full h-[calc(100vh-6rem)]"
+            class="min-h-[calc(100vh-6rem)] grid lg:grid-cols-[20rem_auto] 2xl:grid-cols-[20rem_auto_20rem]"
         >
-            <Sidebar client:load allReferences={allPostsReferences} />
+            <Sidebar client:load allReferences={allPostsReferences} classStyles="hidden lg:flex lg:flex-col" />
 
             <div class="flex flex-col content-between w-full h-full">
                 <article class="h-full">
@@ -42,7 +42,7 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
                 <Footer client:load />
             </div>
 
-            <Sidebar client:load allReferences={postsReferences} />
+            <Sidebar client:load allReferences={postsReferences} classStyles="hidden 2xl:flex 2xl:flex-col"/>
         </main>
 
         <main id="menu-content" class="hidden">

@@ -1,9 +1,7 @@
-export const Sidebar = ({ allReferences = [] }) => {
-    const asideClass =
-        "flex flex-col border border-gray-2 dark:border-white h-full w-80";
+export const Sidebar = ({ allReferences = [], classStyles = "" }) => {
 
     return (
-        <aside className={asideClass}>
+        <aside className={classStyles}>
             {allReferences.map((post) => (
                 <a href={post.url} key={post.url}>
                     {post.title}
