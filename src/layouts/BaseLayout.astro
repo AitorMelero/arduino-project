@@ -27,33 +27,39 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
         <meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
     </head>
-    <body class="h-full bg-white dark:bg-gray-1 text-gray-2 dark:text-white">
+    <body
+        class="h-full bg-white dark:bg-gray-1 text-gray-2 dark:text-white overflow-hidden"
+    >
         <Header client:load pageTitle={pageTitle} />
 
         <main
             id="main-content"
-            class="min-h-[calc(100vh-6rem)] grid lg:grid-cols-[20rem_auto] 2xl:grid-cols-[20rem_auto_20rem]"
+            class="h-[calc(100vh-6rem)] grid lg:grid-cols-[20rem_auto] 2xl:grid-cols-[20rem_auto_20rem] overflow-y-auto"
         >
             <Sidebar
                 client:load
                 allReferences={allPostsReferences}
-                classStyles="hidden lg:flex lg:flex-col lg:pb-16 lg:pr-[30px] lg:hover:pr-5 lg:sticky overflow-y-hidden lg:hover:overflow-y-scroll lg:max-h-[calc(100vh-6rem)]"
+                classStyles="hidden lg:flex lg:flex-col lg:pb-16 lg:pr-[30px] lg:hover:pr-5 lg:sticky overflow-y-hidden lg:hover:overflow-y-auto lg:max-h-[calc(100vh-6rem)] lg:flex-1"
             />
 
-            <div class="flex flex-col content-between w-full h-full">
-                <article class="h-full">
+            <div
+                class="flex flex-col justify-between w-full h-full flex-1 overflow-y-auto"
+            >
+                <article class="min-h-80">
                     <slot />
                 </article>
-                <hr
-                    class="ms-5 me-5 mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
-                />
-                <Footer client:load />
+                <div>
+                    <hr
+                        class="ms-5 me-5 mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
+                    />
+                    <Footer client:load />
+                </div>
             </div>
 
             <Sidebar
                 client:load
                 allReferences={postsReferences}
-                classStyles="hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-scroll 2xl:max-h-[calc(100vh-6rem)]"
+                classStyles="hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-auto 2xl:max-h-[calc(100vh-6rem)] 2xl:flex-1"
                 title="En esta página"
             />
         </main>
