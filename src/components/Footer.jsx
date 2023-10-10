@@ -1,6 +1,6 @@
 export const Footer = () => {
     return (
-        <footer className="h-24 flex flex-wrap flex-row justify-center items-center">
+        <footer className="my-16 flex flex-wrap flex-col sm:flex-row justify-center items-center">
             <a className="mx-10 md:mr-48 md:ml-0 border-b border-white dark:border-gray-1 text-sm font-medium">
                 © 2023 AiBenTor
             </a>
