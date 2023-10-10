@@ -1,13 +1,17 @@
-export const Sidebar = ({ allReferences = [] }) => {
-    const asideClass =
-        "flex flex-col border border-gray-2 dark:border-white h-full w-80";
+import { SectionLink } from "./SectionLink";
 
+export const Sidebar = ({
+    allReferences = [],
+    classStyles = "",
+    title = "",
+}) => {
     return (
-        <aside className={asideClass}>
-            {allReferences.map((post) => (
-                <a href={post.url} key={post.url}>
-                    {post.title}
-                </a>
+        <aside className={classStyles}>
+            <h2 className="my-3 px-4 font-bold text-sm uppercase text-gray-5 dark:text-gray-4">
+                {title}
+            </h2>
+            {allReferences.map(({ url, title }) => (
+                <SectionLink key={url} urlPost={url} titlePost={title} />
             ))}
         </aside>
     );

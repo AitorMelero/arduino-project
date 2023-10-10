@@ -5,10 +5,15 @@ pubDate: 2023-09-25
 description: "This is the second project article."
 author: "MrFork27"
 # image:
-    # url: "https://docs.astro.build/assets/full-logo-light.png"
-    # alt: "The full Astro logo."
+# url: "https://docs.astro.build/assets/full-logo-light.png"
+# alt: "The full Astro logo."
 # tags: ["astro", "blogging", "learning in public"]
-sections: [{url: "project-2#first-point", title: "First Point"}, {url: "project-2#second-point", title: "Second Point"}]
+sections:
+    [
+        { url: "project-2#", title: "Overview" },
+        { url: "project-2#first-point", title: "First Point" },
+        { url: "project-2#second-point", title: "Second Point" },
+    ]
 ---
 
 <h1 id="first-point" class="text-4xl">My Second Project</h1>
