@@ -10,19 +10,42 @@ author: "MrFork27"
 # tags: ["astro", "blogging", "learning in public"]
 sections:
     [
-        { url: "project-1#", title: "Overview" },
-        { url: "project-1#first-project", title: "First Project" },
+        { url: "1-led#led", title: "Overview" },
+        {
+            url: "1-led#introduccion-de-componentes",
+            title: "Introducción de componentes",
+        },
+        { url: "1-led#protoboard-mb-102", title: "Protoboard MB-102" },
+        { url: "1-led#led-componente", title: "LED" },
+        { url: "1-led#resistencias", title: "Resistencias" },
+        { url: "1-led#conexion", title: "Conexión" },
+        { url: "1-led#esquema", title: "Esquema" },
+        { url: "1-led#diagrama-de-cableado", title: "Diagrama de cableados" },
+        { url: "1-led#codigo", title: "Código" },
+        { url: "1-led#imagen-de-ejemplo", title: "Imagen de ejemplo" },
     ]
 ---
 
-# LED
+<!-- # LED -->
+<h1 id="led">LED</h1>
 
 En esta lección, usted aprenderá cómo cambiar el brillo de un LED usando diferentes valores
 de resistencia.
 
+-   [Componentes requeridos](#componentes-requeridos)
+-   [Introducción de componentes](#introduccion-de-componentes)
+    -   [Protoboard MB-102](#protoboard-mb-102)
+    -   [LED](#led-componente)
+    -   [Resistencias](#resistencias)
+-   [Conexión](#conexion)
+    -   [Esquema](#esquema)
+    -   [Diagrama de cableados](#diagrama-de-cableado)
+-   [Código](#codigo)
+-   [Imagen de ejemplo](#imagen-de-ejemplo)
+
 ---
 
-## Componentes requeridos
+## <div id="componentes-requeridos" /> Componentes requeridos
 
 -   (1) x Elegoo Uno R3
 -   LED rojo de 5mm x (1)
@@ -33,9 +56,9 @@ de resistencia.
 
 ---
 
-## Introducción de componentes
+## <a id="introduccion-de-componentes"> Introducción de componentes
 
-### PROTOBOARD MB-102
+### <a id="protoboard-mb-102"> PROTOBOARD MB-102
 
 Un protoboard permite circuitos prototipo rápidamente, sin necesidad de soldar las
 conexiones. A continuación un ejemplo.
@@ -56,7 +79,7 @@ son temporales y de acople, no son tan fiables como conexiones soldadas. Si tien
 problemas intermitentes con un circuito, puede ser debido a una mala conexión en una
 protoboard.
 
-### LED
+### <a id="led-componente"> LED
 
 LED es un gran indicador. Utilizan muy poca electricidad durará para siempre.
 En esta lección, usarás tal vez el más común de todos los LEDs: un LED de 5mm de color
@@ -76,7 +99,7 @@ para el caso del LED.
 Si le sucede que tiene un LED que tiene un lado plano al lado del cable más largo, usted debe
 saber que la pata es el positivo.
 
-### RESISTENCIAS
+### <a id="resistencias"> RESISTENCIAS
 
 Como su nombre lo indica, resistencias de resisten el flujo de electricidad. Cuanto mayor sea
 el valor de la resistencia, resiste más y la menos corriente fluirá a través de él. Vamos a usar
@@ -102,11 +125,11 @@ O puede usar un multímetro digital en lugar de otro.
 
 ---
 
-## Conexión
+## <a id="conexion"> Conexión
 
-### ESQUEMA
+### <a id="esquema"> ESQUEMA
 
-### DIAGRAMA DE CABLEADO
+### <a id="diagrama-de-cableado"> DIAGRAMA DE CABLEADO
 
 La UNO es una conveniente fuente de 5 voltios, que vamos a utilizar para alimentar
 el LED y la resistencia. No necesita hacer nada con su UNO, salvo que lo conecte un
@@ -126,10 +149,10 @@ en algún lugar
 
 ---
 
-## Código
+## <a id="codigo"> Código
 
 ---
 
-## Imagen de ejemplo
+## <a id="imagen-de-ejemplo"> Imagen de ejemplo
 
 ---
