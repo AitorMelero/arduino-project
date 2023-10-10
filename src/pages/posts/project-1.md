@@ -8,7 +8,7 @@ author: "MrFork27"
     # url: "https://docs.astro.build/assets/full-logo-light.png"
     # alt: "The full Astro logo."
 # tags: ["astro", "blogging", "learning in public"]
-sections: [{url: "project-1#first-project", title: "First Project"}]
+sections: [{url: "project-1#", title: "Overview"}, {url: "project-1#first-project", title: "First Project"}]
 ---
 
 <h1 id="first-project">My First Project</h1>
