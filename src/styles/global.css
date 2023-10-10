@@ -3,6 +3,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(64, 71, 86, 1);
+    background: rgba(64, 71, 86, 0.3);
     border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: rgba(64, 71, 86, 1);
 }
