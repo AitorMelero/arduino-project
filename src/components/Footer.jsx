@@ -1,7 +1,28 @@
 export const Footer = () => {
     return (
-        <footer className="border border-gray-2 dark:border-white h-24">
-            <h1>Footer</h1>
+        <footer className="h-24 flex flex-wrap flex-row justify-center items-center">
+            <a className="mx-10 md:mr-48 md:ml-0 border-b border-white dark:border-gray-1 text-sm font-medium">
+                © 2023 AiBenTor
+            </a>
+            <a
+                href="/"
+                className="mx-10 border-b border-white dark:border-gray-1 hover:border-gray-5 hover:dark:border-white text-sm font-medium"
+            >
+                Projects
+            </a>
+            <a
+                href="/about"
+                className="mx-10 border-b border-white dark:border-gray-1 hover:border-gray-5 hover:dark:border-white text-sm font-medium"
+            >
+                About
+            </a>
+            <a
+                href="https://github.com/AitorMelero/arduino-project"
+                target="_blank"
+                className="mx-10 border-b border-white dark:border-gray-1 hover:border-gray-5 hover:dark:border-white text-sm font-medium"
+            >
+                GitHub
+            </a>
         </footer>
     );
 };
