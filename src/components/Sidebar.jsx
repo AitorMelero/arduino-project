@@ -7,7 +7,7 @@ export const Sidebar = ({
 }) => {
     return (
         <aside className={classStyles}>
-            <h2 className="my-3 px-4 font-bold text-sm uppercase text-gray-5 dark:text-gray-4">
+            <h2 className="my-4 px-4 font-bold text-sm uppercase text-gray-5 dark:text-gray-4">
                 {title}
             </h2>
             {allReferences.map(({ url, title }) => (
