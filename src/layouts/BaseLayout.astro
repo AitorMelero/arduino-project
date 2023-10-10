@@ -33,7 +33,11 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
             id="main-content"
             class="min-h-[calc(100vh-6rem)] grid lg:grid-cols-[20rem_auto] 2xl:grid-cols-[20rem_auto_20rem]"
         >
-            <Sidebar client:load allReferences={allPostsReferences} classStyles="hidden lg:flex lg:flex-col lg:pr-5" />
+            <Sidebar
+                client:load
+                allReferences={allPostsReferences}
+                classStyles="hidden lg:flex lg:flex-col lg:pr-5 lg:sticky lg:overflow-y-scroll lg:max-h-[calc(100vh-6rem)]"
+            />
 
             <div class="flex flex-col content-between w-full h-full">
                 <article class="h-full">
@@ -42,7 +46,11 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
                 <Footer client:load />
             </div>
 
-            <Sidebar client:load allReferences={postsReferences} classStyles="hidden 2xl:flex 2xl:flex-col"/>
+            <Sidebar
+                client:load
+                allReferences={postsReferences}
+                classStyles="hidden 2xl:flex 2xl:flex-col"
+            />
         </main>
 
         <main id="menu-content" class="hidden">
