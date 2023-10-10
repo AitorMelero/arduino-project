@@ -1,5 +1,6 @@
 ---
 import { ButtonHeader, Footer, Header, Sidebar } from "../components";
+import "../styles/global.css";
 
 const { pageTitle } = Astro.props;
 const allPosts = await Astro.glob("../pages/posts/*.md");
@@ -31,9 +32,13 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
 
         <main
             id="main-content"
-            class="flex flex-row justify-between w-full h-[calc(100vh-6rem)]"
+            class="min-h-[calc(100vh-6rem)] grid lg:grid-cols-[20rem_auto] 2xl:grid-cols-[20rem_auto_20rem]"
         >
-            <Sidebar client:load allReferences={allPostsReferences} />
+            <Sidebar
+                client:load
+                allReferences={allPostsReferences}
+                classStyles="hidden lg:flex lg:flex-col lg:pb-16 lg:pr-[30px] lg:hover:pr-5 lg:sticky overflow-y-hidden lg:hover:overflow-y-scroll lg:max-h-[calc(100vh-6rem)]"
+            />
 
             <div class="flex flex-col content-between w-full h-full">
                 <article class="h-full">
@@ -42,7 +47,12 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
                 <Footer client:load />
             </div>
 
-            <Sidebar client:load allReferences={postsReferences} />
+            <Sidebar
+                client:load
+                allReferences={postsReferences}
+                classStyles="hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-scroll 2xl:max-h-[calc(100vh-6rem)]"
+                title="En esta página"
+            />
         </main>
 
         <main id="menu-content" class="hidden">
@@ -62,6 +72,12 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
             </header>
             <hr
                 class="ms-5 me-5 mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
+            />
+
+            <Sidebar
+                client:load
+                allReferences={allPostsReferences}
+                classStyles="lg:hidden flex flex-col pb-16 pr-[30px] hover:pr-5 sticky overflow-y-hidden hover:overflow-y-scroll max-h-[calc(100vh-6rem)]"
             />
         </main>
 
