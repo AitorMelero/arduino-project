@@ -1,5 +1,6 @@
 ---
 import { ButtonHeader, Footer, Header, Sidebar } from "../components";
+import "../styles/global.css";
 
 const { pageTitle } = Astro.props;
 const allPosts = await Astro.glob("../pages/posts/*.md");
@@ -26,7 +27,9 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
         <meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
     </head>
-    <body class="h-full bg-white dark:bg-gray-1 text-gray-2 dark:text-white">
+    <body
+        class="h-full bg-white dark:bg-gray-1 text-gray-2 dark:text-white overflow-hidden"
+    >
         <Header client:load pageTitle={pageTitle} />
 
         <main
@@ -36,7 +39,7 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
             <Sidebar
                 client:load
                 allReferences={allPostsReferences}
-                classStyles="hidden lg:flex lg:flex-col lg:pr-5 lg:sticky lg:overflow-y-scroll lg:max-h-[calc(100vh-6rem)]"
+                classStyles="hidden lg:flex lg:flex-col lg:pr-[30px] lg:hover:pr-5 lg:sticky lg:hover:overflow-y-scroll lg:max-h-[calc(100vh-6rem)]"
             />
 
             <div class="flex flex-col content-between w-full h-full">
