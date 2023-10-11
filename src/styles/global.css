@@ -12,6 +12,10 @@
 }
 
 .arduino-article {
+    color: rgb(35, 39, 47);
+}
+
+.dark .arduino-article {
     color: rgb(246, 247, 249);
 }
 
@@ -46,6 +50,10 @@
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     border-bottom-width: 1px;
+    border-color: rgb(235 236 240);
+}
+
+.dark .arduino-article hr {
     border-color: rgba(52, 58, 70, 0.8);
 }
 
@@ -112,7 +120,7 @@
 
 .arduino-article pre {
     align-items: center;
-    background-color: rgb(22, 24, 29) !important;
+    background-color: rgb(255, 255, 255) !important;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
         rgba(0, 0, 0, 0.22) 0px 10px 10px;
@@ -128,6 +136,18 @@
     width: 100%;
 }
 
+.dark .arduino-article pre {
+    background-color: rgb(22, 24, 29) !important;
+}
+
 .arduino-article code {
-    color: white;
+    color: black;
+}
+
+.language-cpp {
+    color: black !important;
+}
+
+.dark .language-cpp {
+    color: white !important;
 }
