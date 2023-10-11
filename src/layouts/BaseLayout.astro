@@ -17,10 +17,31 @@ allPosts.sort(function (a, b) {
 });
 
 // Get all posts with format
-const allPostsReferences = allPosts.map((post) => ({
-    url: post.url,
-    title: post.frontmatter.title,
-}));
+const allPostsReferences = allPosts.map(function (post, index) {
+    let previousPost = null;
+    let nextPost = null;
+
+    // Get the previous and next post URL
+    if (index > 0) {
+        previousPost = {
+            url: allPosts[index - 1].url,
+            title: allPosts[index - 1].frontmatter.title,
+        };
+    }
+    if (index < allPosts.length - 1) {
+        nextPost = {
+            url: allPosts[index + 1].url,
+            title: allPosts[index + 1].frontmatter.title,
+        };
+    }
+
+    return {
+        url: post.url,
+        title: post.frontmatter.title,
+        previousPost,
+        nextPost,
+    };
+});
 // Get all posts links
 const postsReferences = allPosts.find((post) => post.url === pathname)
     ?.frontmatter.sections;

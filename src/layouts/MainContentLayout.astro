@@ -1,7 +1,14 @@
 ---
-import { Footer, Sidebar } from "../components";
+import { Footer, NextPreviousSection, Sidebar } from "../components";
 
 const { allPostsReferences, postsReferences } = Astro.props;
+
+// Search the current blog
+const { pathname } = Astro.url; // current pathname
+const currentPost = allPostsReferences.find((post) => post.url === pathname);
+// Get the previous and next blog
+const previousPost = currentPost?.previousPost;
+const nextPost = currentPost?.nextPost;
 ---
 
 <main
@@ -21,6 +28,14 @@ const { allPostsReferences, postsReferences } = Astro.props;
             <slot />
         </article>
         <div>
+            <hr
+                class="ms-5 me-5 mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
+            />
+            <NextPreviousSection
+                client:load
+                previousPost={previousPost}
+                nextPost={nextPost}
+            />
             <hr
                 class="ms-5 me-5 mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
             />
