@@ -4,7 +4,7 @@ import "../styles/global.css";
 import "../styles/prism.css";
 
 const { pageTitle } = Astro.props;
-const allPosts = await Astro.glob("../pages/posts/*.md");
+const allPosts = await Astro.glob("../pages/posts/*.mdx");
 const { pathname } = Astro.url; // current pathname
 
 const allPostsReferences = allPosts.map((post) => ({
@@ -25,12 +25,6 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
         <meta name="description" content="Astro description" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap"
-            rel="stylesheet"
-        />
         <meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
     </head>

@@ -2,10 +2,8 @@
 https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+arduino+c+cpp */
 code[class*="language-"],
 pre[class*="language-"] {
-    /* color: #000; */
     color: #fff;
     background: 0 0;
-    /* text-shadow: 0 1px #fff; */
     font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
     font-size: 1em;
     text-align: left;
@@ -44,7 +42,6 @@ pre[class*="language-"]::selection {
 }
 pre[class*="language-"] {
     padding: 1em;
-    /* margin: 0.5em 0; */
     overflow: auto;
 }
 :not(pre) > code[class*="language-"],
@@ -75,7 +72,6 @@ pre[class*="language-"] {
 .token.property,
 .token.symbol,
 .token.tag {
-    /* color: #905; */
     color: #977cdc;
 }
 .token.attr-name,
@@ -91,19 +87,15 @@ pre[class*="language-"] {
 .token.entity,
 .token.operator,
 .token.url {
-    /* color: #9a6e3a; */
-    /* background: hsla(0, 0%, 100%, 0.5); */
     color: #ffffff;
 }
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-    /* color: #07a; */
     color: #77b7d7;
 }
 .token.class-name,
 .token.function {
-    /* color: #dd4a68; */
     color: #86d9ca;
 }
 .token.important,
