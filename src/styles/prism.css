@@ -41,7 +41,7 @@ pre[class*="language-"]::selection {
     }
 }
 pre[class*="language-"] {
-    padding: 1em;
+    padding: 24px;
     overflow: auto;
 }
 :not(pre) > code[class*="language-"],
