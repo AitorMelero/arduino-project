@@ -98,3 +98,15 @@
     margin-top: 1rem;
     overflow-wrap: break-word;
 }
+
+.arduino-article a {
+    color: rgb(20, 158, 202);
+    line-height: 1.5;
+    border-bottom: 1px solid inherit;
+    display: inline;
+    text-decoration: inherit;
+}
+
+.arduino-article a:hover {
+    border-bottom: 1px solid rgb(8, 126, 164);
+}

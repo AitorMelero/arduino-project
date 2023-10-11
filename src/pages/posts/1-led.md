@@ -45,7 +45,9 @@ de resistencia.
 
 ---
 
-## <div id="componentes-requeridos" /> Componentes requeridos
+<!-- <h2 id="componentes-requeridos">Componentes requeridos</h2> -->
+
+## <div id="componentes-requeridos"></div> Componentes requeridos
 
 -   (1) x Elegoo Uno R3
 -   LED rojo de 5mm x (1)
@@ -56,9 +58,9 @@ de resistencia.
 
 ---
 
-## <a id="introduccion-de-componentes"> Introducción de componentes
+## <div id="introduccion-de-componentes"></div> Introducción de componentes
 
-### <a id="protoboard-mb-102"> PROTOBOARD MB-102
+### <div id="protoboard-mb-102"></div> PROTOBOARD MB-102
 
 Un protoboard permite circuitos prototipo rápidamente, sin necesidad de soldar las
 conexiones. A continuación un ejemplo.
@@ -79,7 +81,7 @@ son temporales y de acople, no son tan fiables como conexiones soldadas. Si tien
 problemas intermitentes con un circuito, puede ser debido a una mala conexión en una
 protoboard.
 
-### <a id="led-componente"> LED
+### <div id="led-componente"></div> LED
 
 LED es un gran indicador. Utilizan muy poca electricidad durará para siempre.
 En esta lección, usarás tal vez el más común de todos los LEDs: un LED de 5mm de color
@@ -99,7 +101,7 @@ para el caso del LED.
 Si le sucede que tiene un LED que tiene un lado plano al lado del cable más largo, usted debe
 saber que la pata es el positivo.
 
-### <a id="resistencias"> RESISTENCIAS
+### <div id="resistencias"></div> RESISTENCIAS
 
 Como su nombre lo indica, resistencias de resisten el flujo de electricidad. Cuanto mayor sea
 el valor de la resistencia, resiste más y la menos corriente fluirá a través de él. Vamos a usar
@@ -125,11 +127,11 @@ O puede usar un multímetro digital en lugar de otro.
 
 ---
 
-## <a id="conexion"> Conexión
+## <div id="conexion"></div> Conexión
 
-### <a id="esquema"> ESQUEMA
+### <div id="esquema"></div> ESQUEMA
 
-### <a id="diagrama-de-cableado"> DIAGRAMA DE CABLEADO
+### <div id="diagrama-de-cableado"></div> DIAGRAMA DE CABLEADO
 
 La UNO es una conveniente fuente de 5 voltios, que vamos a utilizar para alimentar
 el LED y la resistencia. No necesita hacer nada con su UNO, salvo que lo conecte un
@@ -149,10 +151,10 @@ en algún lugar
 
 ---
 
-## <a id="codigo"> Código
+## <div id="codigo"></div> Código
 
 ---
 
-## <a id="imagen-de-ejemplo"> Imagen de ejemplo
+## <div id="imagen-de-ejemplo"></div> Imagen de ejemplo
 
 ---
