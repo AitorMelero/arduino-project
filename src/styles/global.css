@@ -42,7 +42,6 @@
 }
 
 .arduino-article hr {
-    margin-inline-start: 1.25rem;
     margin-inline-end: 1.25rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
@@ -100,13 +99,38 @@
 }
 
 .arduino-article a {
-    color: rgb(20, 158, 202);
-    line-height: 1.5;
     border-bottom: 1px solid inherit;
+    color: rgb(20, 158, 202);
     display: inline;
+    line-height: 1.5;
     text-decoration: inherit;
 }
 
 .arduino-article a:hover {
     border-bottom: 1px solid rgb(8, 126, 164);
+}
+
+.arduino-article pre {
+    align-items: center;
+    background-color: rgb(22, 24, 29) !important;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    contain: content;
+    display: flex;
+    font-family: "Source Code Pro", monospace;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 30px;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    overflow-wrap: break-word;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.arduino-article code {
+    color: white;
+    padding-left: 18px;
+    padding-right: 18px;
 }
