@@ -1,5 +1,7 @@
 ---
-import { ButtonHeader, Footer, Header, Sidebar } from "../components";
+import MainContentLayout from "./MainContentLayout.astro";
+import MenuMobileLayout from "./MenuMobileLayout.astro";
+import { Header } from "../components";
 import "../styles/global.css";
 import "../styles/prism.css";
 
@@ -22,9 +24,6 @@ const allPostsReferences = allPosts.map((post) => ({
 // Get all posts links
 const postsReferences = allPosts.find((post) => post.url === pathname)
     ?.frontmatter.sections;
-
-// Header buttons styles
-const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
 ---
 
 <!doctype html>
@@ -42,63 +41,14 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
     >
         <Header client:load pageTitle={pageTitle} />
 
-        <main
-            id="main-content"
-            class="h-[calc(100vh-6rem)] grid lg:grid-cols-[20rem_auto] 2xl:grid-cols-[20rem_auto_20rem] overflow-y-auto"
+        <MainContentLayout
+            allPostsReferences={allPostsReferences}
+            postsReferences={postsReferences}
         >
-            <Sidebar
-                client:load
-                allReferences={allPostsReferences}
-                classStyles="hidden lg:flex lg:flex-col lg:pb-16 lg:pr-[30px] lg:hover:pr-5 lg:sticky overflow-y-hidden lg:hover:overflow-y-scroll lg:max-h-[calc(100vh-6rem)] lg:flex-1"
-            />
+            <slot />
+        </MainContentLayout>
 
-            <div
-                class="flex flex-col justify-between w-full h-full flex-1 overflow-y-auto"
-            >
-                <article class="arduino-article px-12 py-5 min-h-80">
-                    <slot />
-                </article>
-                <div>
-                    <hr
-                        class="ms-5 me-5 mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
-                    />
-                    <Footer client:load />
-                </div>
-            </div>
-
-            <Sidebar
-                client:load
-                allReferences={postsReferences}
-                classStyles="hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-scroll 2xl:max-h-[calc(100vh-6rem)] 2xl:flex-1"
-                title="En esta página"
-            />
-        </main>
-
-        <main id="menu-content" class="hidden">
-            <header class="pt-4 flex flex-row justify-around">
-                <ButtonHeader
-                    client:load
-                    textButton="Projects"
-                    pathURL="/"
-                    generalStyles={buttonGeneralStyle}
-                />
-                <ButtonHeader
-                    client:load
-                    textButton="About"
-                    pathURL="/about"
-                    generalStyles={buttonGeneralStyle}
-                />
-            </header>
-            <hr
-                class="ms-5 me-5 mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
-            />
-
-            <Sidebar
-                client:load
-                allReferences={allPostsReferences}
-                classStyles="lg:hidden flex flex-col pb-16 pr-[30px] hover:pr-5 sticky overflow-y-hidden hover:overflow-y-scroll max-h-[calc(100vh-6rem)]"
-            />
-        </main>
+        <MenuMobileLayout allPostsReferences={allPostsReferences} />
 
         <script>
             import "../scripts/theme.js";
