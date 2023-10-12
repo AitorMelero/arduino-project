@@ -28,17 +28,13 @@ const nextPost = currentPost?.nextPost;
             <slot />
         </article>
         <div>
-            <hr
-                class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
-            />
+            <hr class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3" />
             <NextPreviousSection
                 client:load
                 previousPost={previousPost}
                 nextPost={nextPost}
             />
-            <hr
-                class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
-            />
+            <hr class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3" />
             <Footer client:load />
         </div>
     </div>
@@ -47,6 +43,6 @@ const nextPost = currentPost?.nextPost;
         client:load
         allReferences={postsReferences}
         classStyles="hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-scroll 2xl:max-h-[calc(100vh-6rem)] 2xl:flex-1"
-        title="En esta página"
+        title={postsReferences ? "En esta página" : ""}
     />
 </main>
