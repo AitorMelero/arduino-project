@@ -7,7 +7,11 @@ export const NextPreviousSection = ({
     const flexDirection = !previousPost ? "flex-row-reverse" : "flex-row";
 
     return (
-        <div className={"flex justify-between py-12 px-5 " + flexDirection}>
+        <div
+            className={
+                "md:flex md:justify-between py-12 mx-auto max-w-7xl " + flexDirection
+            }
+        >
             {previousPost ? (
                 <NextPreviousButton isNext={false} {...previousPost} />
             ) : (
