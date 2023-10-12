@@ -57,6 +57,48 @@ function actionByPathname() {
     setStylesButtonLinks(mobileMenuLinkButtons);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////
+// Obtén todos los elementos con la clase ".arduino-article"
+const elementosArduinoArticle =
+    document.querySelector(".arduino-article").children;
+
+// Opciones de Intersection Observer
+const opciones = {
+    root: null, // Utiliza la ventana gráfica como elemento raíz
+    rootMargin: "0px", // Sin margen alrededor del elemento raíz
+    threshold: 0, // Umbral de intersección (0 significa que cualquier parte del elemento visible activa el evento)
+};
+
+let visiblesElements = new Array(elementosArduinoArticle.length);
+function setVisiblesElements(element, position) {
+    visiblesElements[position] = element;
+    console.log(visiblesElements);
+}
+
+function elementoTocaHeader(entries, observer) {
+    // entries.forEach((entry) => {
+    const elementosArray = Array.from(elementosArduinoArticle);
+    entries.forEach((entry) => {
+        const i = elementosArray.indexOf(entry.target); // Encuentra el índice del elemento
+        if (i !== -1) {
+            if (entry.isIntersecting) {
+                // El elemento toca el header
+                const elementoTocado = entry.target.id;
+                visiblesElements[i] = elementoTocado;
+                setVisiblesElements(elementoTocado, i);
+            } else {
+                setVisiblesElements(null, i);
+            }
+        }
+    });
+}
+
+for (let i = 0; i < elementosArduinoArticle.length; i++) {
+    const observer = new IntersectionObserver(elementoTocaHeader, opciones);
+    observer.observe(elementosArduinoArticle[i]);
+}
+//////////////////////////////////////////////////////////////////////////////////////////////
+
 // Listen if hash change in path
 window.addEventListener("hashchange", actionByPathname);
 
