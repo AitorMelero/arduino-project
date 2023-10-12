@@ -23,9 +23,13 @@ const nextPost = currentPost?.nextPost;
     />
 
     <div
+        id="arduino-article-container"
         class="flex flex-col justify-between w-full h-full flex-1 overflow-y-auto px-5"
     >
-        <article class="arduino-article md:px-12 py-5 min-h-80">
+        <article
+            id="arduino-article"
+            class="arduino-article md:px-12 py-5 min-h-80"
+        >
             <slot />
         </article>
         <div>
