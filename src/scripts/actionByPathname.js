@@ -32,9 +32,6 @@ function setStylesButtonLinks(buttonLinks) {
 }
 
 function actionByPathname() {
-    // Set left menu buttons links styles
-    setStylesButtonLinks(leftMenuLinkButtons);
-
     // Check if URL has an ID reference
     if (window.location.hash) {
         // Remove "#" from start of ID
@@ -49,10 +46,12 @@ function actionByPathname() {
         // If the element exists, move and add links buttons styles
         if (targetElement) {
             targetElement.scrollIntoView({ behavior: "smooth" });
-
-            setStylesButtonLinks(rightMenuLinkButtons);
         }
     }
+
+    // Set menus buttons links styles
+    setStylesButtonLinks(leftMenuLinkButtons);
+    setStylesButtonLinks(rightMenuLinkButtons);
 }
 
 // Listen if hash change in path
