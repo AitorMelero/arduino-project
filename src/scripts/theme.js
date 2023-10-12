@@ -9,10 +9,10 @@ const theme = (() => {
     return "light";
 })();
 
-if (theme === "light") {
-    document.documentElement.classList.remove("dark");
-} else {
+if (theme === "dark") {
     document.documentElement.classList.add("dark");
+} else {
+    document.documentElement.classList.remove("dark");
 }
 
 window.localStorage.setItem("theme", theme);

@@ -1,0 +1,32 @@
+---
+import { ButtonHeader, Sidebar } from "../components";
+
+const { allPostsReferences } = Astro.props;
+
+// Header buttons styles
+const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
+---
+
+<main id="menu-content" class="hidden">
+    <header class="pt-4 flex flex-row justify-around">
+        <ButtonHeader
+            client:load
+            textButton="Projects"
+            pathURL="/"
+            generalStyles={buttonGeneralStyle}
+        />
+        <ButtonHeader
+            client:load
+            textButton="About"
+            pathURL="/about"
+            generalStyles={buttonGeneralStyle}
+        />
+    </header>
+    <hr class="ms-5 me-5 mt-4 mb-2 border-b border-gray-4 dark:border-gray-3" />
+
+    <Sidebar
+        client:load
+        allReferences={allPostsReferences}
+        classStyles="lg:hidden flex flex-col pb-16 pr-[30px] hover:pr-5 sticky overflow-y-hidden hover:overflow-y-scroll max-h-[calc(100vh-6rem)]"
+    />
+</main>

@@ -14,6 +14,7 @@ module.exports = {
             "gray-5": "rgba(64, 71, 86, 1)",
             blue: "rgb(20, 158, 202)",
             "blue-2": "rgba(20, 158, 202, 0.1)",
+            "blue-3": "rgb(8, 126, 164)",
         },
     },
     plugins: [],
