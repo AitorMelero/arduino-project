@@ -23,7 +23,7 @@ export const ButtonHeader = ({
         // Check if the button is focus
         if (
             pathname === pathURL ||
-            (id === "projects" && pathname.split("/")[1] === "posts")
+            (pathURL === "/" && pathname.split("/")[1] === "posts")
         ) {
             setClassStyles(isSelectedClass);
         }

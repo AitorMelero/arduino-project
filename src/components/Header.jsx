@@ -22,12 +22,12 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
 
             <div className="flex flex-row justify-center items-center">
                 <ButtonHeader
-                    textButton="Projects"
+                    textButton="Proyectos"
                     pathURL="/"
                     generalStyles={buttonLinkDynamicStyle}
                 />
                 <ButtonHeader
-                    textButton="About"
+                    textButton="Acerca de"
                     pathURL="/about"
                     generalStyles={buttonLinkDynamicStyle}
                 />

@@ -1,0 +1,52 @@
+---
+import { Footer, NextPreviousSection, Sidebar } from "../components";
+
+const { allPostsReferences, postsReferences } = Astro.props;
+
+// Search the current blog
+const { pathname } = Astro.url; // current pathname
+const currentPost = allPostsReferences.find((post) => post.url === pathname);
+// Get the previous and next blog
+const previousPost = currentPost?.previousPost;
+const nextPost = currentPost?.nextPost;
+---
+
+<main
+    id="main-content"
+    class="h-[calc(100vh-6rem)] grid lg:grid-cols-[20rem_auto] 2xl:grid-cols-[20rem_auto_20rem] overflow-y-auto"
+>
+    <Sidebar
+        client:load
+        allReferences={allPostsReferences}
+        classStyles="hidden lg:flex lg:flex-col lg:pb-16 lg:pr-[30px] lg:hover:pr-5 lg:sticky overflow-y-hidden lg:hover:overflow-y-scroll lg:max-h-[calc(100vh-6rem)] lg:flex-1"
+    />
+
+    <div
+        class="flex flex-col justify-between w-full h-full flex-1 overflow-y-auto px-5"
+    >
+        <article class="arduino-article md:px-12 py-5 min-h-80">
+            <slot />
+        </article>
+        <div>
+            <hr
+                class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
+            />
+            <NextPreviousSection
+                client:load
+                previousPost={previousPost}
+                nextPost={nextPost}
+            />
+            <hr
+                class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3"
+            />
+            <Footer client:load />
+        </div>
+    </div>
+
+    <Sidebar
+        client:load
+        allReferences={postsReferences}
+        classStyles="hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-scroll 2xl:max-h-[calc(100vh-6rem)] 2xl:flex-1"
+        title="En esta página"
+    />
+</main>
