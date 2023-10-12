@@ -5,6 +5,4 @@ export * from "./Footer";
 export * from "./Header";
 export * from "./NextPreviousButton";
 export * from "./NextPreviousSection";
-export * from "./SectionLink";
-export * from "./Sidebar";
 export * from "./ThemeButton";

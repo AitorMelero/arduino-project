@@ -19,6 +19,8 @@ const rightMenu = document.getElementById("right-menu");
 const rightMenuLinkButtons = Array.from(rightMenu.querySelectorAll("a"));
 const leftMenu = document.getElementById("left-menu");
 const leftMenuLinkButtons = Array.from(leftMenu.querySelectorAll("a"));
+const mobileMenu = document.getElementById("mobile-menu");
+const mobileMenuLinkButtons = Array.from(mobileMenu.querySelectorAll("a"));
 
 function setStylesButtonLinks(buttonLinks) {
     buttonLinks.forEach(function (button) {
@@ -52,6 +54,7 @@ function actionByPathname() {
     // Set menus buttons links styles
     setStylesButtonLinks(leftMenuLinkButtons);
     setStylesButtonLinks(rightMenuLinkButtons);
+    setStylesButtonLinks(mobileMenuLinkButtons);
 }
 
 // Listen if hash change in path
