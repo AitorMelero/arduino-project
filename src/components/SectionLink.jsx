@@ -25,9 +25,5 @@ export const SectionLink = ({ urlPost, titlePost }) => {
         } */
     }, []);
 
-    return (
-        <a href={urlPost} className={classStyles}>
-            {titlePost}
-        </a>
-    );
+    return <a href={urlPost}>{titlePost}</a>;
 };
