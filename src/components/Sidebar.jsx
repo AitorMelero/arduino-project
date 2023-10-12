@@ -1,12 +1,13 @@
 import { SectionLink } from "./SectionLink";
 
 export const Sidebar = ({
+    id = "",
     allReferences = [],
     classStyles = "",
     title = "",
 }) => {
     return (
-        <aside className={classStyles}>
+        <aside id={id} className={classStyles}>
             {title !== "" ? (
                 <h2 className="my-4 px-4 font-bold text-sm uppercase text-gray-5 dark:text-gray-4">
                     {title}

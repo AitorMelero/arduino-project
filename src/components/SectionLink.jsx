@@ -16,11 +16,13 @@ export const SectionLink = ({ urlPost, titlePost }) => {
 
     useEffect(() => {
         const pathname = window.location.pathname.split("/").pop();
+        const idReferencia = window.location.hash;
 
         // Check if the button is focus
-        if (id === pathname) {
+        // if (id === pathname || id === pathname + idReferencia) {
+        /* if (id === pathname) {
             setClassStyles(isSelectedClass);
-        }
+        } */
     }, []);
 
     return (
