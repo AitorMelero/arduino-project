@@ -1,5 +1,6 @@
 ---
-import { ButtonHeader, Sidebar } from "../components";
+import Sidebar from "../components/Sidebar.astro";
+import { ButtonHeader } from "../components";
 
 const { allPostsReferences } = Astro.props;
 
@@ -25,7 +26,7 @@ const buttonGeneralStyle = "w-40 text-center text-base rounded-full ";
     <hr class="ms-5 me-5 mt-4 mb-2 border-b border-gray-4 dark:border-gray-3" />
 
     <Sidebar
-        client:load
+        id="mobile-menu"
         allReferences={allPostsReferences}
         classStyles="lg:hidden flex flex-col pb-16 pr-[30px] hover:pr-5 sticky overflow-y-hidden hover:overflow-y-scroll max-h-[calc(100vh-6rem)]"
     />
