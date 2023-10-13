@@ -59,6 +59,7 @@ function actionByPathname() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
+/* 
 // Obtén todos los elementos con la clase ".arduino-article"
 const elementosArduinoArticle =
     document.querySelector(".arduino-article").children;
@@ -119,7 +120,7 @@ for (let i = 0; i < elementosArduinoArticle.length; i++) {
     observer.observe(elementosArduinoArticle[i]);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
-
+ */
 // Listen if hash change in path
 window.addEventListener("hashchange", actionByPathname);
 
