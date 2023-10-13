@@ -11,12 +11,14 @@ const currentPost = allPostsReferences.find((post) => post.url === pathname);
 const previousPost = currentPost?.previousPost;
 const nextPost = currentPost?.nextPost;
 
+// Dynamic styles if right menu exists or not
 const mainContentColumns = postsReferences
     ? "2xl:grid-cols-[20rem_auto_20rem]"
     : "";
 const menuRightStyles = postsReferences
     ? "hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-scroll 2xl:max-h-[calc(100vh-6rem)] 2xl:flex-1"
     : "hidden";
+const articleContainerStyles = postsReferences ? "" : "lg:pr-11";
 ---
 
 <main
@@ -32,7 +34,7 @@ const menuRightStyles = postsReferences
 
     <div
         id="arduino-article-container"
-        class="flex flex-col justify-between w-full h-full flex-1 overflow-y-auto px-5"
+        class={"flex flex-col justify-between w-full h-full flex-1 overflow-y-auto px-5 " + articleContainerStyles}
     >
         <article
             id="arduino-article"

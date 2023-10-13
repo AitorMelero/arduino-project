@@ -1,78 +1,39 @@
 ---
+import { ArduinoLogo } from "../components";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/mainPage.css";
 
 const pageTitle = "Arduino Project";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-    <section class="flex flex-col justify-center items-center pr-32">
-        <header class="flex flex-col justify-center items-center">
+    <section class="flex flex-col justify-center">
+        <header class="flex flex-col items-center my-5">
             <h1>Arduino Project</h1>
-            <quote>por AiBenTor</quote>
+            <quote class="text-lg">por AiBenTor</quote>
         </header>
 
         <hr />
 
-        <article>
+        <article class="main-article">
             <p>
-                ¡Bienvenidos a nuestro emocionante rincón en línea dedicado al
-                apasionante mundo de Arduino! Aquí, en nuestro blog, te
-                invitamos a un viaje de descubrimiento donde la electrónica se
-                encuentra con la creatividad. Si eres un entusiasta de la
-                tecnología, un principiante curioso o un maker experimentado,
-                has llegado al lugar adecuado. Arduino es una plataforma de
-                desarrollo que ha revolucionado la forma en que interactuamos
-                con el mundo digital y físico. A través de una serie de
-                proyectos prácticos y emocionantes, te guiaremos por el
-                fascinante universo de Arduino y te mostraremos cómo puedes dar
-                vida a tus ideas electrónicas. Desde sensores y actuadores hasta
-                proyectos de IoT, domótica y mucho más, descubrirás cómo diseñar
-                y crear tus propios dispositivos electrónicos.
-            </p>
-            <h2>¿Qué Puedes Esperar de Nuestro Blog?</h2>
-
-            <p>
-                Proyectos Creativos: Explorarás una amplia variedad de proyectos
-                simples y complejos que van desde un control remoto
-                personalizado hasta estaciones meteorológicas autónomas.
-                Nuestros tutoriales detallados y ejemplos prácticos te guiarán
-                paso a paso.
-            </p>
-            <p>
-                Consejos y Trucos: Aprenderás valiosos consejos y trucos para
-                optimizar tus proyectos Arduino, desde la elección de
-                componentes hasta la depuración de código.
-            </p>
-            <p>
-                Tendencias y Novedades: Mantente al día con las últimas
-                tendencias en el mundo de Arduino y la electrónica DIY.
-                Descubrirás las últimas novedades, herramientas y accesorios
-                para llevar tus creaciones al siguiente nivel.
-            </p>
-            <p>
-                Comunidad e Interacción: Nos encantaría que te involucres.
-                Comparte tus proyectos, ideas y desafíos en la sección de
-                comentarios de nuestros artículos. ¡Juntos construiremos una
-                comunidad apasionada y colaborativa!
+                ¡Bienvenidos a nuestro emocionante rincón dedicado a Arduino! Ya
+                seas un entusiasta de la tecnología, un principiante curioso o
+                un experto, este es tu destino. Explora el universo de Arduino,
+                la plataforma que ha revolucionado la interacción entre lo
+                digital y lo físico. A través de proyectos emocionantes, te
+                guiaremos en el descubrimiento de cómo dar vida a tus ideas
+                electrónicas: sensores, actuadores, IoT, domótica y mucho más.
             </p>
 
-            <h2>Por Qué Elegirnos:</h2>
+            <div
+                class="flex row justify-center mt-10 grow-0 items-center text-center mx-5"
+            >
+                <ArduinoLogo width={120} height={120} client:load />
+            </div>
 
-            <p>
-                Nuestro equipo de escritores y expertos en Arduino se dedica a
-                simplificar la tecnología para que todos puedan entenderla y
-                disfrutarla. Ya sea que estés buscando inspiración para tu
-                próximo proyecto, desees aprender sobre electrónica o quieras
-                potenciar tus habilidades de programación, estamos aquí para
-                acompañarte en cada paso del camino.
-            </p>
-
-            <p>
-                Únete a nosotros en esta emocionante aventura electrónica
-                mientras exploramos, creamos y compartimos conocimiento sobre
-                Arduino. ¡No importa si eres un principiante o un experto, hay
-                un lugar para ti en nuestra comunidad! ¡Comencemos a crear y
-                descubrir juntos!
+            <p class="font-bold text-blue-3 text-3xl mt-10">
+                ¡Únete a nosotros en este apasionante viaje!
             </p>
         </article>
     </section>
