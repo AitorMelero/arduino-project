@@ -10,11 +10,19 @@ const currentPost = allPostsReferences.find((post) => post.url === pathname);
 // Get the previous and next blog
 const previousPost = currentPost?.previousPost;
 const nextPost = currentPost?.nextPost;
+
+const mainContentColumns = postsReferences
+    ? "2xl:grid-cols-[20rem_auto_20rem]"
+    : "";
+const menuRightStyles = postsReferences
+    ? "hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-scroll 2xl:max-h-[calc(100vh-6rem)] 2xl:flex-1"
+    : "hidden";
 ---
 
 <main
     id="main-content"
-    class="h-[calc(100vh-6rem)] grid lg:grid-cols-[20rem_auto] 2xl:grid-cols-[20rem_auto_20rem] overflow-y-auto"
+    class={"h-[calc(100vh-6rem)] grid lg:grid-cols-[20rem_auto] overflow-y-auto " +
+        mainContentColumns}
 >
     <Sidebar
         id="left-menu"
@@ -33,7 +41,13 @@ const nextPost = currentPost?.nextPost;
             <slot />
         </article>
         <div>
-            <hr class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3" />
+            {
+                previousPost || nextPost ? (
+                    <hr class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3" />
+                ) : (
+                    <div />
+                )
+            }
             <NextPreviousSection
                 client:load
                 previousPost={previousPost}
@@ -47,7 +61,7 @@ const nextPost = currentPost?.nextPost;
     <Sidebar
         id="right-menu"
         allReferences={postsReferences}
-        classStyles="hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-scroll 2xl:max-h-[calc(100vh-6rem)] 2xl:flex-1"
+        classStyles={menuRightStyles}
         title={postsReferences ? "En esta página" : ""}
     />
 </main>
