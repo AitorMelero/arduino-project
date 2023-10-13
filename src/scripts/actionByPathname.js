@@ -58,69 +58,6 @@ function actionByPathname() {
     setStylesButtonLinks(mobileMenuLinkButtons);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
-/* 
-// Obtén todos los elementos con la clase ".arduino-article"
-const elementosArduinoArticle =
-    document.querySelector(".arduino-article").children;
-
-// Opciones de Intersection Observer
-const opciones = {
-    root: null, // Utiliza la ventana gráfica como elemento raíz
-    rootMargin: "0px", // Sin margen alrededor del elemento raíz
-    threshold: 0, // Umbral de intersección (0 significa que cualquier parte del elemento visible activa el evento)
-};
-
-let visiblesElements = new Array(elementosArduinoArticle.length).fill(null);
-function paintFirstVisibleElement(element, position) {
-    // Get current visible index
-    const currentVisibleIndex = visiblesElements.indexOf(
-        visiblesElements.find((vElement) => vElement)
-    );
-
-    // Insert new value
-    visiblesElements[position] = element;
-
-    // Get posible new current visible index
-    const newCurrentVisibleIndex = visiblesElements.indexOf(
-        visiblesElements.find((vElement) => vElement)
-    );
-
-    // If there is new current visible value
-    if (currentVisibleIndex !== newCurrentVisibleIndex) {
-        rightMenuLinkButtons.forEach(function (linkButton) {
-            if (linkButton.hash === visiblesElements[newCurrentVisibleIndex]) {
-                linkButton.className = isSelectedClass;
-            } else {
-                linkButton.className = isNotSelectedClass;
-            }
-        });
-    }
-}
-
-function elementoTocaHeader(entries, observer) {
-    const elementosArray = Array.from(elementosArduinoArticle);
-    entries.forEach((entry) => {
-        const i = elementosArray.indexOf(entry.target); // Encuentra el índice del elemento
-        if (i !== -1) {
-            if (entry.isIntersecting) {
-                // El elemento toca el header
-                const elementoTocado = "#" + entry.target.id;
-                // visiblesElements[i] = elementoTocado;
-                paintFirstVisibleElement(elementoTocado, i);
-            } else {
-                paintFirstVisibleElement(null, i);
-            }
-        }
-    });
-}
-
-for (let i = 0; i < elementosArduinoArticle.length; i++) {
-    const observer = new IntersectionObserver(elementoTocaHeader, opciones);
-    observer.observe(elementosArduinoArticle[i]);
-}
-//////////////////////////////////////////////////////////////////////////////////////////////
- */
 // Listen if hash change in path
 window.addEventListener("hashchange", actionByPathname);
 
