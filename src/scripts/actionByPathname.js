@@ -69,10 +69,21 @@ const opciones = {
     threshold: 0, // Umbral de intersección (0 significa que cualquier parte del elemento visible activa el evento)
 };
 
-let visiblesElements = new Array(elementosArduinoArticle.length);
-function setVisiblesElements(element, position) {
+let visiblesElements = new Array(elementosArduinoArticle.length).fill(null);
+function paintFirstVisibleElement(element, position) {
+    let currentVisibleElement = visiblesElements.find((element) => element);
+    let currentVisibleIndex = visiblesElements.indexOf(currentVisibleElement);
+
     visiblesElements[position] = element;
-    console.log(visiblesElements);
+
+    // Change the current visible element
+    if (position <= currentVisibleIndex && position >= 0) {
+        let currentVisibleLink = rightMenuLinkButtons.find(button => button.hash === currentVisibleElement);
+        currentVisibleLink.className = isNotSelectedClass;
+        currentVisibleElement = visiblesElements.find((element) => element);
+        currentVisibleLink = rightMenuLinkButtons.find(button => button.hash === currentVisibleElement);
+        currentVisibleLink.className = isSelectedClass;
+    }
 }
 
 function elementoTocaHeader(entries, observer) {
@@ -83,11 +94,11 @@ function elementoTocaHeader(entries, observer) {
         if (i !== -1) {
             if (entry.isIntersecting) {
                 // El elemento toca el header
-                const elementoTocado = entry.target.id;
-                visiblesElements[i] = elementoTocado;
-                setVisiblesElements(elementoTocado, i);
+                const elementoTocado = "#" + entry.target.id;
+                // visiblesElements[i] = elementoTocado;
+                paintFirstVisibleElement(elementoTocado, i);
             } else {
-                setVisiblesElements(null, i);
+                paintFirstVisibleElement(null, i);
             }
         }
     });
