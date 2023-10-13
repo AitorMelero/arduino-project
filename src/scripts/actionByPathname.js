@@ -47,7 +47,8 @@ function actionByPathname() {
 
         // If the element exists, move and add links buttons styles
         if (targetElement) {
-            targetElement.scrollIntoView({ behavior: "smooth" });
+            // targetElement.scrollIntoView({ behavior: "smooth" });
+            targetElement.scrollIntoView();
         }
     }
 
@@ -71,23 +72,32 @@ const opciones = {
 
 let visiblesElements = new Array(elementosArduinoArticle.length).fill(null);
 function paintFirstVisibleElement(element, position) {
-    let currentVisibleElement = visiblesElements.find((element) => element);
-    let currentVisibleIndex = visiblesElements.indexOf(currentVisibleElement);
+    // Get current visible index
+    const currentVisibleIndex = visiblesElements.indexOf(
+        visiblesElements.find((vElement) => vElement)
+    );
 
+    // Insert new value
     visiblesElements[position] = element;
 
-    // Change the current visible element
-    if (position <= currentVisibleIndex && position >= 0) {
-        let currentVisibleLink = rightMenuLinkButtons.find(button => button.hash === currentVisibleElement);
-        currentVisibleLink.className = isNotSelectedClass;
-        currentVisibleElement = visiblesElements.find((element) => element);
-        currentVisibleLink = rightMenuLinkButtons.find(button => button.hash === currentVisibleElement);
-        currentVisibleLink.className = isSelectedClass;
+    // Get posible new current visible index
+    const newCurrentVisibleIndex = visiblesElements.indexOf(
+        visiblesElements.find((vElement) => vElement)
+    );
+
+    // If there is new current visible value
+    if (currentVisibleIndex !== newCurrentVisibleIndex) {
+        rightMenuLinkButtons.forEach(function (linkButton) {
+            if (linkButton.hash === visiblesElements[newCurrentVisibleIndex]) {
+                linkButton.className = isSelectedClass;
+            } else {
+                linkButton.className = isNotSelectedClass;
+            }
+        });
     }
 }
 
 function elementoTocaHeader(entries, observer) {
-    // entries.forEach((entry) => {
     const elementosArray = Array.from(elementosArduinoArticle);
     entries.forEach((entry) => {
         const i = elementosArray.indexOf(entry.target); // Encuentra el índice del elemento
