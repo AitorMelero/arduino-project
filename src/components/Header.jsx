@@ -15,7 +15,9 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
         <header className="shadow-[0_16px_32px_-16px_rgba(0,0,0,.1),0_0_0_1px_rgba(0,0,0,.1)] dark:shadow-[0_16px_32px_-16px_rgba(0,0,0,.1),0_0_0_1px_hsla(0,0%,100%,.05)] sticky top-0 h-24 flex flex-row justify-between z-10 bg-white dark:bg-gray-1">
             <BurgerButton classStyles={menuBurguerStyle} />
 
-            <ArduinoLogo />
+            <div className="flex grow sm:grow-0 items-center text-center mx-5">
+                <ArduinoLogo />
+            </div>
             <h1 className="hidden sm:flex grow items-center text-4xl text-center font-medium">
                 {pageTitle}
             </h1>
