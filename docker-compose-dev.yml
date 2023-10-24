@@ -1,8 +1,0 @@
-version: "v2.22.0-desktop.2"
-services:
-  dev:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - "4321:4321"

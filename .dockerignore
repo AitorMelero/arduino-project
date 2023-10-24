@@ -1,3 +1,11 @@
+# build output
+dist/
+
+# dependencies
+node_modules/
+
+# macOS-specific files
 .DS_Store
-node_modules
-dist
+
+# Visual Studio Code
+.vscode
