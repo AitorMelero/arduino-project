@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    image: arduino-project:1
+    container_name: arduino-project
+    ports:
+      - "4321:4321"
