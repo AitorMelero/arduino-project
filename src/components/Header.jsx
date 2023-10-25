@@ -1,5 +1,4 @@
-import { IconBrandGithubFilled } from "@tabler/icons-react";
-import { ArduinoLogo, ButtonHeader } from "./";
+import { ArduinoLogo, ButtonHeader, GitHubIcon } from "./";
 import { ThemeButton } from "./ThemeButton";
 import { BurgerButton } from "./BurgerButton";
 
@@ -34,13 +33,10 @@ export const Header = ({ pageTitle = "Arduino Project" }) => {
                     generalStyles={buttonLinkDynamicStyle}
                 />
                 <ThemeButton classStyles={hoverIconStyle} />
-                <a
-                    href="https://github.com/AitorMelero/arduino-project"
-                    target="_blank"
-                    className={hoverIconStyle}
-                >
-                    <IconBrandGithubFilled />
-                </a>
+                <GitHubIcon
+                    url={"https://github.com/AitorMelero/arduino-project"}
+                    stylesClasses={hoverIconStyle}
+                />
             </div>
         </header>
     );
