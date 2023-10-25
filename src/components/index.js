@@ -2,6 +2,7 @@ export * from "./ArduinoLogo";
 export * from "./BurgerButton";
 export * from "./ButtonHeader";
 export * from "./Footer";
+export * from "./GitHubIcon";
 export * from "./Header";
 export * from "./NextPreviousButton";
 export * from "./NextPreviousSection";
