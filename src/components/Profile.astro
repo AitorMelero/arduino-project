@@ -1,0 +1,30 @@
+---
+const {
+    name,
+    imageUrl,
+    description,
+    gitHubUrl,
+    linkedInUrl,
+    isStyleReverse = false,
+} = Astro.props;
+
+const styleClasses = isStyleReverse
+    ? "flex flex-col sm:flex-row-reverse flex-wrap items-center justify-between my-8"
+    : "flex flex-col sm:flex-row flex-wrap items-center justify-between my-8";
+---
+
+<article class={styleClasses}>
+    <div class="w-100% sm:w-[30%] rounded-full">
+        <img src={imageUrl} alt={name} class="w-80 !rounded-full" />
+    </div>
+    <div class="w-[100%] sm:w-[60%]">
+        <h2 class="text-blue">{name}</h2>
+        <p class="!text-2xl">
+            {description}
+        </p>
+        <div class="flex flex-row justify-between w-[50%] sm:w-40 h-7">
+            <a href={gitHubUrl} target="_blank">GitHub</a>
+            <a href={linkedInUrl} target="_blank">LinkedIn</a>
+        </div>
+    </div>
+</article>

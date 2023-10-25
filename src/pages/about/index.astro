@@ -1,7 +1,26 @@
 ---
+import Profile from "../../components/Profile.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const pageTitle = "Arduino Project";
+
+// Aitor Profile Info
+const AITOR_NAME = "Aitor Melero";
+const AITOR_IMAGE = "aitor.svg";
+const AITOR_DESC =
+    "Aitor, graduado en Ingeniería Informática por la Universidad Autónoma de Madrid, es un apasionado desarrollador web que encuentra su motivación en la creación de aplicaciones y la expresión de su creatividad a través del código. Su constante formación y su habilidad para transformar ideas en soluciones digitales son el reflejo de cada proyecto que nace de su mano.";
+const AITOR_GITHUB = "https://github.com/AitorMelero";
+const AITOR_LINKEDIN =
+    "https://www.linkedin.com/in/aitor-melero-pic%C3%B3n-678105293/";
+
+// Ben Profile Info
+const BEN_NAME = "Benjamín Martín";
+const BEN_IMAGE = "ben.svg";
+const BEN_DESC =
+    "Anim velit proident aliquip reprehenderit sunt velit ullamco fugiat cupidatat enim et ad sunt labore. Commodo nulla proident eiusmod exercitation. Mollit voluptate adipisicing reprehenderit aliquip laboris. Adipisicing id excepteur nisi et ea ipsum laborum irure amet veniam dolore. Elit veniam officia fugiat adipisicing id ea excepteur nisi id elit velit.";
+const BEN_GITHUB = "https://github.com/mg-ben";
+const BEN_LINKEDIN =
+    "https://www.linkedin.com/in/aitor-melero-pic%C3%B3n-678105293/";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -10,71 +29,26 @@ const pageTitle = "Arduino Project";
     </header>
 
     <section class="w-full h-auto">
-        <article
-            class="flex flex-col sm:flex-row flex-wrap items-center justify-between my-8"
-        >
-            <div class="w-100% sm:w-[30%] rounded-full">
-                <img
-                    src="aitor.svg"
-                    alt="Aitor Melero"
-                    class="w-80 !rounded-full"
-                />
-            </div>
-            <div class="w-[100%] sm:w-[60%]">
-                <h2 class="text-blue">Aitor Melero</h2>
-                <p class="!text-2xl">
-                    Aitor, graduado en Ingeniería Informática por la Universidad
-                    Autónoma de Madrid, es un apasionado desarrollador web que
-                    encuentra su motivación en la creación de aplicaciones y la
-                    expresión de su creatividad a través del código. Su
-                    constante formación y su habilidad para transformar ideas en
-                    soluciones digitales son el reflejo de cada proyecto que
-                    nace de su mano.
-                </p>
-                <div class="flex flex-row justify-between w-[50%] sm:w-40 h-7">
-                    <a href="https://github.com/AitorMelero" target="_blank"
-                        >GitHub</a
-                    >
-                    <a
-                        href="https://www.linkedin.com/in/aitor-melero-pic%C3%B3n-678105293/"
-                        target="_blank">LinkedIn</a
-                    >
-                </div>
-            </div>
-        </article>
+        <!-- Aitor's profile -->
+        <Profile
+            name={AITOR_NAME}
+            imageUrl={AITOR_IMAGE}
+            description={AITOR_DESC}
+            gitHubUrl={AITOR_GITHUB}
+            linkedInUrl={AITOR_LINKEDIN}
+            isStyleReverse={false}
+        />
 
         <hr />
 
-        <article
-            class="flex flex-col sm:flex-row-reverse flex-wrap items-center justify-between my-8"
-        >
-            <div class="w-100% sm:w-[30%] rounded-full">
-                <img
-                    src="ben.svg"
-                    alt="Aitor Melero"
-                    class="w-80 !rounded-full"
-                />
-            </div>
-            <div class="w-[100%] sm:w-[60%]">
-                <h2 class="text-blue">Benjamín Martín</h2>
-                <p class="!text-2xl">
-                    Mollit do sint in deserunt voluptate velit exercitation. Ex
-                    dolore veniam voluptate sunt elit laborum consequat do
-                    ullamco mollit aute pariatur laboris cupidatat. Magna do
-                    Lorem aliqua quis. Irure occaecat excepteur ea et enim ipsum
-                    eu velit deserunt laborum quis consequat. Est culpa deserunt
-                    duis ut pariatur culpa exercitation.
-                </p>
-                <div class="flex flex-row justify-between w-[50%] sm:w-40 h-7">
-                    <a href="https://github.com/mg-Ben" target="_blank"
-                        >GitHub</a
-                    >
-                    <a
-                        href="https://www.linkedin.com/in/aitor-melero-pic%C3%B3n-678105293/"
-                        target="_blank">LinkedIn</a
-                    >
-                </div>
-            </div>
-        </article>
+        <!-- Ben's profile -->
+        <Profile
+            name={BEN_NAME}
+            imageUrl={BEN_IMAGE}
+            description={BEN_DESC}
+            gitHubUrl={BEN_GITHUB}
+            linkedInUrl={BEN_LINKEDIN}
+            isStyleReverse={true}
+        />
     </section>
 </BaseLayout>
