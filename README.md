@@ -278,5 +278,12 @@ git flow feature finish feature_branch
 
 ## Contacto
 
--   GitHub [@AitorMelero](https://github.com/AitorMelero)
--   GitHub [@mg-Ben](https://github.com/mg-Ben)
+### Aitor
+
+[![Aitor-GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/AitorMelero)
+[![Aitor-LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aitor-melero-pic%C3%B3n-678105293/)
+
+### Ben
+
+[![Ben-GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/mg-Ben)
+[![Ben-LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/benjam%C3%ADn-mart%C3%ADn-g%C3%B3mez-60a8ab271/)
