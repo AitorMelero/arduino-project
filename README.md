@@ -20,7 +20,7 @@
 
 -   [Objetivo](#objetivo)
     -   [Tecnologías](#tecnologías)
--   [Instalación y ejecución](#instalacion-y-ejecucion)
+-   [Instalación y ejecución](#instalación-y-ejecución)
 -   [Esribir artículos](#escribir-articulos)
 -   [Contacto](#contacto)
 
@@ -36,45 +36,60 @@ La web ha sido desarrollada por [@AitorMelero](https://github.com/AitorMelero) y
 
 ### Tecnologías
 
--   [![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
--   [![Arduino](https://img.shields.io/badge/Arduino-00878F?logo=arduino&logoColor=white)](https://www.arduino.cc/)
--   [![HTML](https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
--   [![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
--   [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white)](https://developer.mozilla.org/es/docs/Web/JavaScript)
--   [![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)](https://es.react.dev/)
--   [![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
--   [![MDX](https://img.shields.io/badge/MDX-1B1F24?logo=mdx&logoColor=white)](https://https://mdxjs.com/)
--   [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
+[![Arduino](https://img.shields.io/badge/Arduino-00878F?logo=arduino&logoColor=white)](https://www.arduino.cc/)
+[![HTML](https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
+[![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+[![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)](https://es.react.dev/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![MDX](https://img.shields.io/badge/MDX-1B1F24?logo=mdx&logoColor=white)](https://https://mdxjs.com/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
-<!-- OVERVIEW -->
+<!-- INSTALACION Y EJECUCION -->
 
-## Overview
+## Instalación y ejecución
 
-Website where the development process of various projects carried out with Arduino will be published in the form of articles.
-
-### Built With
-
-<!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
-
--   [HTML](https://www.w3schools.com/html/)
--   [CSS](https://www.w3schools.com/css/)
--   [JavaScript](https://developer.mozilla.org/es/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
--   [React](https://react.dev/)
--   [Astro](https://astro.build/)
--   [Arduino](https://www.arduino.cc/)
-
-## Installation and Execution
-
-Install dependencies:
+### Instalar dependencias:
 
 ```
 npm install
 ```
 
-Run the project:
+### Ejecutar la web en modo desarrollador:
 
 ```
 npm run dev
+```
+
+### Ejecutar la web en modo desarrollador en una red local:
+
+```
+npm run dev -- --host
+```
+
+### Creación de ejecutable
+
+```
+npm run build
+```
+
+### Levantar web con Docker
+
+```
+docker compose up
+```
+
+### Eliminar contenedor Docker
+
+```
+docker compose down
+```
+
+### Eliminar contenedor e imágenes Docker
+
+```
+docker compose down --rmi all
 ```
 
 ## Contact
