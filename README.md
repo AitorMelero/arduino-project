@@ -175,6 +175,92 @@ Aquí aparecerá un resumen del proyecto con el índice correspondiente.
 </div>
 ```
 
+-   Lista de componentes requeridos
+
+```html
+<div id="componentes-requeridos">
+
+## Componentes requeridos
+
+-   (1) Componente 1
+-   (3) Componente 2
+-   (1) Componente 3
+
+---
+
+</div>
+```
+
+-   Introducción de componentes
+
+```html
+<div id="introduccion-de-componentes">
+
+## Introducción de componentes
+
+</div>
+
+<div id="componente-1">
+
+### Componente 1
+
+</div>
+
+<div id="componente-2">
+
+### Componente 2
+
+</div>
+
+<div id="componente-3">
+
+### Componente 3
+
+---
+
+</div>
+```
+
+-   Incluir imágenes
+
+```html
+<!-- Las imagenes deben estar guardadas en ./public/posts/ -->
+![Descripcion de la foto](/posts/nombre_imagen.png)
+```
+
+-   Incluir código
+
+```javascript
+// Incluir el siguiente componente despues de la cabecera del fichero
+import CodeContainer from "../../components/CodeContainer.astro";
+export const components = { code: CodeContainer };
+```
+
+```html
+<div id="codigo">
+
+## Código
+
+`&#96;``&#96;``&#96;`
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(13, HIGH);  // write 1 (5V) in 13 pin
+  delay(1000);             // wait 1 second
+  digitalWrite(13, LOW);   // write 0 (0V) in 13 pin
+  delay(1000);             // wait 1 second
+}
+`&#96;``&#96;``&#96;`
+
+---
+
+</div>
+```
+
 ## Contacto
 
 -   GitHub [@AitorMelero](https://github.com/AitorMelero)
