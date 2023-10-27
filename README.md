@@ -6,28 +6,45 @@
 </br>
 <div align="center">
 
-[![Astro](https://img.shields.io/badge/Astro-ff5a03)](https://astro.build/)
-[![Arduino](https://img.shields.io/badge/Arduino-00A2A6)](https://www.arduino.cc/)
-[![HTML](https://img.shields.io/badge/HTML-e34c26)](https://developer.mozilla.org/es/docs/Web/HTML)
-[![CSS](https://img.shields.io/badge/CSS-563d7c)](https://developer.mozilla.org/es/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-f1e05a)](https://developer.mozilla.org/es/docs/Web/JavaScript)
-[![React](https://img.shields.io/badge/React-blue)](https://es.react.dev/)
-[![Tailwind](https://img.shields.io/badge/Tailwind-F82F98)](https://tailwindcss.com/)
-[![MDX](https://img.shields.io/badge/MDX-fcb32c)](https://https://mdxjs.com/)
-[![Docker](https://img.shields.io/badge/Docker-2e7f74)](https://www.docker.com/)
+[![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
+[![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)](https://es.react.dev/)
+[![Arduino](https://img.shields.io/badge/Arduino-00878F?logo=arduino&logoColor=white)](https://www.arduino.cc/)
 
 ---
 
 </div>
 
-<!-- TABLE OF CONTENTS -->
+<!-- INDICE -->
 
-## Table of Contents
+## Índice
 
--   [Overview](#overview)
-    -   [Built With](#built-with)
--   [Installation and Execution](#installation-and-execution)
--   [Contact](#contact)
+-   [Objetivo](#objetivo)
+    -   [Tecnologías](#tecnologías)
+-   [Instalación y ejecución](#instalacion-y-ejecucion)
+-   [Esribir artículos](#escribir-articulos)
+-   [Contacto](#contacto)
+
+<!-- OBJETIVO -->
+
+## Objetivo
+
+El objetivo de este proyecto es el desarrollo de una web donde se publicarán cada cierto tiempo artículos en los que se explicarán diferentes proyectos realizados con Arduino.
+
+Con respecto a la web, la motivación principal es ganar experiencia con diferentes tecnologías como [Astro](https://astro.build/), [React](https://es.react.dev/) o [Tailwind](https://tailwindcss.com/). En cuanto a los proyectos de [Arduino](https://www.arduino.cc/), el objetivo es aprender y ganar experiencia con la realización de trabajos enfocados en hardware.
+
+La web ha sido desarrollada por [@AitorMelero](https://github.com/AitorMelero) y los proyectos y artículos de Arduino están hechos por [@mg-Ben](https://github.com/mg-Ben).
+
+### Tecnologías
+
+-   [![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
+-   [![Arduino](https://img.shields.io/badge/Arduino-00878F?logo=arduino&logoColor=white)](https://www.arduino.cc/)
+-   [![HTML](https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
+-   [![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
+-   [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+-   [![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)](https://es.react.dev/)
+-   [![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+-   [![MDX](https://img.shields.io/badge/MDX-1B1F24?logo=mdx&logoColor=white)](https://https://mdxjs.com/)
+-   [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
 <!-- OVERVIEW -->
 
