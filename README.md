@@ -7,6 +7,7 @@
 <div align="center">
 
 [![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)](https://es.react.dev/)
 [![Arduino](https://img.shields.io/badge/Arduino-00878F?logo=arduino&logoColor=white)](https://www.arduino.cc/)
 
@@ -19,9 +20,9 @@
 ## Índice
 
 -   [Objetivo](#objetivo)
-    -   [Tecnologías](#tecnologías)
+-   [Tecnologías](#tecnologías)
 -   [Instalación y ejecución](#instalación-y-ejecución)
--   [Esribir artículos](#escribir-articulos)
+-   [Esribir artículos](#escribir-artículos)
 -   [Contacto](#contacto)
 
 <!-- OBJETIVO -->
@@ -34,9 +35,10 @@ Con respecto a la web, la motivación principal es ganar experiencia con diferen
 
 La web ha sido desarrollada por [@AitorMelero](https://github.com/AitorMelero) y los proyectos y artículos de Arduino están hechos por [@mg-Ben](https://github.com/mg-Ben).
 
-### Tecnologías
+## Tecnologías
 
 [![Astro](https://img.shields.io/badge/Astro-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Arduino](https://img.shields.io/badge/Arduino-00878F?logo=arduino&logoColor=white)](https://www.arduino.cc/)
 [![HTML](https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
 [![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
@@ -52,47 +54,128 @@ La web ha sido desarrollada por [@AitorMelero](https://github.com/AitorMelero) y
 
 ### Instalar dependencias:
 
-```
+```bash
 npm install
 ```
 
 ### Ejecutar la web en modo desarrollador:
 
-```
+```bash
 npm run dev
 ```
 
 ### Ejecutar la web en modo desarrollador en una red local:
 
-```
+```bash
 npm run dev -- --host
 ```
 
 ### Creación de ejecutable
 
-```
+```bash
 npm run build
 ```
 
 ### Levantar web con Docker
 
-```
+```bash
 docker compose up
 ```
 
 ### Eliminar contenedor Docker
 
-```
+```bash
 docker compose down
 ```
 
 ### Eliminar contenedor e imágenes Docker
 
-```
+```bash
 docker compose down --rmi all
 ```
 
-## Contact
+## Escribir artículos
+
+El desarrollo de la web está preparado para que se puedan añadir artículos de Arduino de una forma sencilla y rápida. Se deben seguir los siguiente pasos:
+
+### 1. Crear y movernos a una nueva rama:
+
+-   Sin la extensión de git-flow
+
+```bash
+git checkout develop
+git checkout -b feature_branch
+```
+
+-   Con la extensión de git-flow
+
+```bash
+git flow feature finish feature_branch
+```
+
+### 2. Crear artículo
+
+Para incluir un artículo en la web, debemos crear un fichero _.mdx_ dentro del directorio _./src/pages/posts/nombre-articulo.mdx_.
+
+```bash
+src
+  ├───pages
+  │   ├───about
+  │   └───posts
+  │   │   ├───articulo-1.mdx
+  │   │   ├───articulo-2.mdx
+  │   │   ├───articulo-3.mdx
+```
+
+### 3. Rellenar artículo
+
+-   Cabecera
+
+```javascript
+---
+mdxOptions: { format: "md" }
+layout: "../../layouts/MarkdownProjectLayout.astro"
+title: "Título del artículo"
+pubDate: aaaa-mm-dd
+description: "Descripción del artículo."
+author: "Nombre del autor"
+sections:
+    [
+        { url: "nombre-fichero#id-apartado-1", title: "Titulo apartado 1" },
+        { url: "nombre-fichero#id-apartado-2", title: "Titulo apartado 2" },
+        { url: "nombre-fichero#id-apartado-3", title: "Titulo apartado 3" },
+        { url: "nombre-fichero#id-apartado-4", title: "Titulo apartado 4" },
+        ...
+    ]
+---
+```
+
+-   Resumen e índice
+
+```html
+<div id="id-apartado-1">
+
+# {frontmatter.title}
+
+Aquí aparecerá un resumen del proyecto con el índice correspondiente.
+
+-   [Componentes requeridos](#componentes-requeridos)
+-   [Introducción de componentes](#introduccion-de-componentes)
+    -   [Componente 1](#componente-1)
+    -   [Componente 2](#componente-2)
+    -   [Componente 3](#componente-3)
+-   [Conexión](#conexion)
+    -   [Esquema](#esquema)
+    -   [Diagrama de cableados](#diagrama-de-cableado)
+-   [Código](#codigo)
+-   [Imagen de ejemplo](#imagen-de-ejemplo)
+
+---
+
+</div>
+```
+
+## Contacto
 
 -   GitHub [@AitorMelero](https://github.com/AitorMelero)
 -   GitHub [@mg-Ben](https://github.com/mg-Ben)
