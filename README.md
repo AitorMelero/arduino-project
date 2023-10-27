@@ -110,7 +110,7 @@ git checkout -b feature_branch
 -   Con la extensión de git-flow
 
 ```bash
-git flow feature finish feature_branch
+git flow feature start feature_branch
 ```
 
 ### 2. Crear artículo
@@ -236,12 +236,12 @@ import CodeContainer from "../../components/CodeContainer.astro";
 export const components = { code: CodeContainer };
 ```
 
-```html
+````html
 <div id="codigo">
 
 ## Código
 
-`&#96;``&#96;``&#96;`
+```
 void setup() {
   // put your setup code here, to run once:
   pinMode(13, OUTPUT);
@@ -254,11 +254,26 @@ void loop() {
   digitalWrite(13, LOW);   // write 0 (0V) in 13 pin
   delay(1000);             // wait 1 second
 }
-`&#96;``&#96;``&#96;`
+```
 
 ---
 
 </div>
+````
+
+### 4. Mergear artículo:
+
+-   Sin la extensión de git-flow
+
+```bash
+git checkout develop
+git merge feature_branch
+```
+
+-   Con la extensión de git-flow
+
+```bash
+git flow feature finish feature_branch
 ```
 
 ## Contacto
