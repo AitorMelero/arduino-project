@@ -1,0 +1,269 @@
+---
+mdxOptions: { format: "md" }
+layout: "../../layouts/MarkdownProjectLayout.astro"
+title: "Control de encendido de un diodo LED mediante botón"
+pubDate: 2023-10-09
+description: "Proyecto preliminar de Arduino UNO R3 que consiste en el control del período de encendido y apagado de un diodo LED mediante un botón y Arduino UNO R3"
+author: "Benjamín Martín Gómez"
+sections:
+    [
+        { url: "proyecto-0#template", title: "Resumen" },
+        {
+            url: "proyecto-0#componentes-requeridos",
+            title: "Componentes requeridos",
+        },
+        {
+            url: "proyecto-0#introduccion-de-componentes",
+            title: "Introducción de componentes",
+        },
+        { url: "proyecto-0#button", title: "Button" },
+        { url: "proyecto-0#white-led", title: "Diodo White LED" },
+        { url: "proyecto-0#conexion", title: "Conexión" },
+        { url: "proyecto-0#esquema", title: "Esquema" },
+        {
+            url: "proyecto-0#diagrama-de-cableado",
+            title: "Diagrama de cableado",
+        },
+        { url: "proyecto-0#codigo", title: "Código" },
+        { url: "proyecto-0#imagen-de-ejemplo", title: "Imagen de ejemplo" },
+    ]
+---
+
+import CodeContainer from "../../components/CodeContainer.astro";
+export const components = { code: CodeContainer };
+
+<div id="template">
+
+# {frontmatter.title}
+
+En este proyecto se desarrollará un control de encendido y apagado de un diodo *White* LED utilizando Arduino UNO R3, así como un dispositivo *Button* para seleccionar la velocidad o período de encendido y apagado. Concretamente, el objetivo es que, cuando el usuario pulse el botón, el diodo LED modifique su período de activación en 5 posibles valores: 0.1 segundos, 0.2 segundos, 0.4 segundos, 0.8 segundos y 1 segundo (por ejemplo, cuando el LED esté en el modo de 1 segundo, deberá mantenerse encendido durante 1 segundo y apagado durante 1 segundo, y así sucesivamente).
+
+-   [Componentes requeridos](#componentes-requeridos)
+-   [Introducción de componentes](#introduccion-de-componentes)
+    -   [Button](#button)
+    -   [Diodo White LED](#white-led)
+-   [Conexión](#conexion)
+    -   [Esquema](#esquema)
+    -   [Diagrama de cableados](#diagrama-de-cableado)
+-   [Código](#codigo)
+-   [Imagen de ejemplo](#imagen-de-ejemplo)
+
+---
+
+</div>
+
+<div id="componentes-requeridos">
+
+## Componentes requeridos
+
+-   (1) Button
+-   (1) Diodo White LED
+
+---
+
+</div>
+
+<div id="introduccion-de-componentes">
+
+## Introducción de componentes
+
+</div>
+
+<div id="button">
+
+### Button
+
+![Button](/posts/proyecto-0/button.jpeg)
+
+El dispositivo electrónico *Button* se trata de un componente que permite que el usuario interactúe con el circuito permitiendo o no permitiendo el paso de corriente entre dos nodos de dicho circuito. Por esta razón, el símbolo circuital que representa a este componente es el siguiente:
+
+![Switch Symbol Button](/posts/proyecto-0/switchsymbol.jpeg)
+
+Este dispositivo será de especial utilidad en el presente proyecto, puesto que desde Arduino será necesario capturar cuándo el usuario pulsa el botón para realizar la modificación en el período de activación del diodo *White* LED. No obstante, Arduino solo posee pines de entrada digital o analógica, por lo que, de algún modo, es necesario transformar la acción del usuario sobre el botón en una señal de tensión.
+
+<br></br>
+
+Por esta razón, el diseño deberá cumplir lo siguiente:
+- Cuando el usuario pulsa el botón, deberán enviarse 5 voltios a la entrada digital Arduino.
+- Cuando el botón no está presionado, deberán enviarse 0 voltios a la entrada digital de Arduino.
+
+Con el objetivo de lograr implementar esta funcionalidad, una primera tentativa se muestra a continuación:
+
+![Primera tentativa](/posts/proyecto-0/switch_primeraidea.jpeg)
+
+De tal modo que, cuando el usuario presiona el botón, los 5 voltios del extremo izquierdo pasan al extremo derecho (a la entrada digital de Arduino), mientras que, cuando el botón no está presionado, la tensión que percibe el pin digital de Arduino es de 0 voltios (GND, *Ground*).
+
+<br></br>
+
+No obstante, este primer diseño no es adecuado por el riesgo de cortocircuito: se puede observar que, cuando el botón es presionado, aunque los 5 voltios pasen al pin digital de Arduino, en la rama circuital que une GND con los 5 voltios existirá una diferencia de tensión de 5 voltios y una resistencia aparentemente nula. Bajo estas condiciones y según la [Ley de Ohm](https://es.wikipedia.org/wiki/Ley_de_Ohm) que establece que la corriente es la tensión dividida entre la resistencia, cuando se tiene una resistencia nula y una diferencia de tensión no despreciable (5 voltios en este caso), la corriente tiende a infinito. Este fenómeno puede causar la destrucción de los pines digitales de Arduino o de los componentes electrónicos que conforman el circuito.
+
+<br></br>
+
+La solución para este tipo de casos consiste en implementar una resistencia de *Pull-down*. En un [ejemplo práctico](https://docs.arduino.cc/built-in-examples/digital/Button) mostrado en la web oficial de Arduino, esta resistencia se escoge con valor de 10K &#937;, que, para este caso, garantiza una corriente de 0.5 mA en la rama donde se colocará la resistencia (y, por tanto, dado que el terminal de entrada está abierto, ese mismo valor de corriente será el que pasará directamente a la entrada del pin digital de Arduino). El resultado circuital queda como:
+
+![Segunda tentativa](/posts/proyecto-0/switch_segundaidea.jpeg)
+
+Este será el circuito final que se implementará para el proyecto.
+
+</div>
+
+<div id="white-led">
+
+### Diodo White LED
+
+![White LED Diode](/posts/proyecto-0/whiteled.jpeg)
+
+Un diodo es un dispositivo electrónico que se fabrica como la unión de dos [semiconductores extrínsecos](https://en.wikipedia.org/wiki/Extrinsic_semiconductor) (esto es, con impurezas). Los semiconductores extrínsecos son piezas semiconductoras compuestas por la unión atómica de un elemento químico concreto (por ejemplo, unión de átomos de Silicio), pero a las que se les añaden átomos de otro elemento químico (como Fósforo) para que la pieza final posea una mayoría de electrones (portadores negativos o donantes) o huecos (portadores positivos o aceptores). Cuando se dopa una pieza compuesta por átomos de Silicio, dado que el Silicio posee 4 electrones en su última capa (estos son los electrones que se enlazarán con otros electrones de otros átomos), al añadir un átomo de Fósforo (que posee 5 electrones en su última capa) habrá un electrón sin estar enlazado: por tanto, se habrá dopado y será un semiconductor extrínseco tipo n. Si se sustituyen átomos de Silicio por átomos de Boro (por ejemplo), dado que el Boro solo posee 3 electrones en su última capa, habrá mayoría de huecos y se habrá dopado como tipo p.
+
+<br></br>
+
+En la práctica, un diodo se fabrica uniendo un semiconductor extrínseco tipo n (sin prácticamente huecos) con uno tipo p (sin prácticamente electrones). Cuando se produce esta unión e incluso sin condiciones de excitación de tensión, se genera una [RCE](https://byjus.com/neet/depletion-region/) (Región de Carga Espacial) debido a que los electrones de la pieza tipo n se recombinan (ocupan) con los huecos de la pieza tipo p, de modo que se forman iones positivos y negativos en la zona central de la unión. Al aplicar una diferencia de tensión a la unión p-n completa, esta región aumentará o disminuirá su anchura, facilitando o impidiendo el paso de los electrones y, por tanto, la conducción.
+
+<br></br>
+
+Cuando se aplica una cierta tensión a la unión p-n, los portadores negativos y positivos en los extremos de la región RCE aumentan exponencialmente con la tensión aplicada. Esto ocasiona que el crecimiento de la corriente en el diodo sea exponencial con la tensión aplicada entre sus bornes. Por esta razón, el comportamiento de la corriente que atraviesa el diodo (i<sub>D</sub>) en función de la tensión aplicada entre sus bornes (v<sub>D</sub>) es exponencial y es necesario tenerlo en cuenta para evitar excesos de corriente (esta curva se conoce como **curva característica del diodo** y cumple la [Ecuación de Shockley](https://en.wikipedia.org/wiki/Shockley_diode_equation)).
+
+<br></br>
+
+Un diodo posee un terminal denominado ánodo (terminal positivo) y otro denominado cátodo (terminal negativo). Físicamente, el ánodo es aquella pata con mayor longitud del diodo. Para que en el circuito funcione adecuadamente, deberá recibir mayor tensión en el ánodo y menor tensión en el cátodo (esto es, se debe polarizar en directa), aunque algunos diodos pueden funcionar polarizados en inversa (no es el caso). Por tanto, el ánodo deberá ser aquel terminal que recibirá la tensión desde Arduino UNO R3 (los 5 voltios), mientras que el cátodo estará conectado a GND.
+
+![Diode circuit symbol](/posts/proyecto-0/diodesymbol.png)
+
+Cuando se coloca un diodo en un circuito, típicamente se utiliza una resistencia con la que sea posible regular la cantidad de corriente y evitar así que el diodo o algunos componentes del circuito se quemen. En este caso, desde Arduino emitiremos 5 voltios hacia el diodo *White* LED, pero, de acuerdo con el manual del fabricante, alimentar el diodo con 5 voltios ocasionará una corriente excesiva para el circuito:
+
+![Characteristic White LED diode curve](/posts/proyecto-0/characteristic_whiteled_curve.png)
+
+Por tanto, se regula el **punto de conmutación del diodo** a través de una resistencia como se muestra a continuación:
+
+![Punto conmutación del Diodo con resistencia](/posts/proyecto-0/diodo_puntoconmutacion_calculos.jpeg)
+
+El punto de conmutación del diodo es el par (v<sub>D</sub>, i<sub>D</sub>) en el que opera el diodo. Como es de esperar, el objetivo es que el diodo opere a una tensión tal que la corriente sea un valor concreto que evite sobrecorrientes. La estrategia para controlar el punto de conmutación consiste en encontrar el valor de la resistencia colocada en serie con el diodo para este fin y se lleva a cabo como:
+1. Por un lado, la corriente del diodo cumple la Ecuación de Shockley, que describe dicha corriente i<sub>D</sub> en función de la tensión entre los bornes del diodo v<sub>D</sub>.
+2. Sin embargo, por el otro, la corriente del diodo en el circuito debe ser igual que la corriente de la resistencia. Como podemos ver, también nos relaciona, al igual que la Ecuación de Shockley, la corriente en función de v<sub>D</sub>.
+3. Dado que ambas han de ser iguales, típicamente se dan diferentes valores a R y, sobre una misma gráfica, se calcula el punto de corte entre ambas funciones: i<sub>D</sub>(v<sub>D</sub>) dada por la Ecuación de Shockley e i<sub>D</sub>(v<sub>D</sub>) dada por el circuito. Sin embargo, es posible directamente elegir el punto deseado de conmutación (v<sub>D</sub>, i<sub>D</sub>) y calcular R para ese par (v<sub>D</sub>, i<sub>D</sub>).
+
+Por tanto, en base a la [curva característica del diodo dada por el fabricante](/posts/proyecto-0/characteristic_whiteled_curve.png), se elgirá el punto (v<sub>D</sub>, i<sub>D</sub>) = (2.1 voltios, 7.5 mA), que da como resultado una resistencia de valor R = 386.67 &#937;. Si no se posee un valor de resistencia exacto, se pueden disponer algunas en serie (dado que el total es la suma) para alcanzar un valor aproximado (por ejemplo, una de 330 &#937; junto con 5 o 6 resistencias de 10 &#937;).
+
+---
+
+</div>
+
+
+<div id="conexion">
+
+## Conexión
+
+</div>
+
+<div id="esquema">
+
+### Esquema
+
+La conexión circuital queda como se muestra a continuación:
+
+![Esquema](/posts/proyecto-0/esquema_dibujo.jpeg)
+
+</div>
+
+<div id="diagrama-de-cableado">
+
+### Diagrama de cableado
+
+Es posible realizar el diseño utilizando el [simulador Web de Arduino](https://wokwi.com/). El resultado es el siguiente:
+
+![Diagrama de cableado](/posts/proyecto-0/arduino_websim.png)
+
+---
+
+</div>
+
+<div id="codigo">
+
+## Código
+
+El algoritmo deberá llevar a cabo los siguientes pasos:
+1. En primer lugar, leer de forma repetida el valor del pin de entrada digital asociado al botón. La lectura de Arduino se realiza a alta velocidad, por lo que es posible que, aunque el usuario pulse el botón una vez en un instante de tiempo concreto, Arduino detecte miles de '1' seguidos. Por esta razón, lo que realmente será interesante en este proyecto es detectar no si el valor recibido es un '1' lógico, sino si el valor anterior era '0' y el valor leído actual es '1' (esto es, interesan únicamente los cambios de transición de estados). Esto se puede lograr creando únicamente dos variables: una que lleve el registro del último valor leído y otra que lleve el registro del valor actual. Para la lectura se empleará el método `digitalRead()`:
+```
+#define DIGITAL_INPUT_PIN 2
+...
+void loop() {
+    read_value = digitalRead(DIGITAL_INPUT_PIN);
+    read_value_was = read_value;
+}
+```
+2. A continuación, se comprueba si el valor leído es un '1' lógico y si, además, es distinto al anterior. En caso afirmativo, se produce un cambio de estado y se deberá modificar la periodicidad con la que se enciende el LED. Para ello, se define un array con las posibles periodicidades de encendido/apagado del LED. Posteriormente, es necesario definir de algún modo a qué nuevo estado se debe cambiar de los 5 posibles, para lo que se define la variable ```int count```. Esta variable llevará la cuenta del número de veces que el usuario quiso cambiar el estado del LED. A través de la fórmula ```int(count/NUM_STATES)*NUM_STATES;```, es posible mapear el valor de ```count``` a un índice entre 0 y 4 con el que se pueda acceder al próximo valor de periodicidad del LED.
+
+```
+#define DIGITAL_INPUT_PIN 2
+int delay_time_milliseconds_states[NUM_STATES] = {100, 200, 400, 800, 1000};
+int count; 
+...
+void loop() {
+    read_value = digitalRead(DIGITAL_INPUT_PIN);
+
+    if(read_value == 1 && read_value_was == 0){
+        int idx = count - int(count/NUM_STATES)*NUM_STATES;
+        delay_time_milliseconds = delay_time_milliseconds_states[idx];
+        count++;
+    }
+
+    read_value_was = read_value;
+}
+```
+3. Finalmente, se realiza la operación de encendido y apagado del LED, para lo que es necesario escribir en el pin de salida conectado al LED un '1' lógico durante el tiempo del estado actual y un '0' lógico durante ese mismo valor de tiempo.
+
+El código completo se muestra a continuación:
+
+```
+#define DIGITAL_INPUT_PIN 2
+#define DIGITAL_OUTPUT_PIN 3
+#define NUM_STATES 5
+
+bool read_value;
+bool read_value_was;
+int delay_time_milliseconds;
+int delay_time_milliseconds_states[NUM_STATES] = {100, 200, 400, 800, 1000};
+int count; 
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(DIGITAL_INPUT_PIN, INPUT);
+  pinMode(DIGITAL_OUTPUT_PIN, OUTPUT);
+  read_value = 0;
+  read_value_was = 0;
+  delay_time_milliseconds = 1000;
+  count = 0;
+  Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(DIGITAL_OUTPUT_PIN, HIGH);
+  delay(delay_time_milliseconds);
+  digitalWrite(DIGITAL_OUTPUT_PIN, LOW);
+  delay(delay_time_milliseconds);
+
+  read_value = digitalRead(DIGITAL_INPUT_PIN);
+  if(read_value == 1 && read_value_was == 0){
+    int idx = count - int(count/NUM_STATES)*NUM_STATES;
+    delay_time_milliseconds = delay_time_milliseconds_states[idx];
+    count++;
+  }
+  read_value_was = read_value;
+}
+
+```
+
+---
+
+</div>
+
+<div id="imagen-de-ejemplo">
+
+## Imagen de ejemplo
+
+![Ejemplo](/posts/proyecto-0/demostracion.gif)
+
+_por {frontmatter.author}_
+
+</div>
