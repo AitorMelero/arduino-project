@@ -4,7 +4,7 @@
 
 // Buttons links styles
 const generalStyles =
-    "pr-2 pl-6 py-3 rounded-r-2xl font-medium text-sm transform active:scale-95 transition-transform ";
+    "max-sm:truncate pr-2 pl-6 py-3 rounded-r-2xl font-medium text-sm transform active:scale-95 transition-transform ";
 const isSelectedClass = generalStyles + "bg-blue-2 text-blue";
 const isNotSelectedClass =
     generalStyles + "hover:bg-gray-4 hover:dark:bg-gray-3";
