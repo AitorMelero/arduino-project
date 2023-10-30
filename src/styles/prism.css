@@ -90,6 +90,13 @@ pre[class*="language-"] {
 .token.entity,
 .token.operator,
 .token.url {
+    color: #000000;
+}
+.dark .language-css .token.string,
+.dark .style .token.string,
+.dark .token.entity,
+.dark .token.operator,
+.dark .token.url {
     color: #ffffff;
 }
 .token.atrule,
