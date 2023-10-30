@@ -17,3 +17,4 @@ En el **MVP** de la aplicación deben desarrollarse los puntos de la siguiente l
     -   **Conexión:** Esta sección está compuesta por dos subsecciones que son **Esquema** y **Diagrama de cableado**. En **Esquema** se mostrará un esquema (dibujo) del proyecto y en **Diagrama de cableado** se mostrará el diagrama del proyecto realizado con el simulador de Arduino usado.
     -   **El código:** En este apartado se explica el código del proyecto.
     -   **Imagen de ejemplo:** En este apartado se muestra una imagen del proyecto realizado en vivo.
+
