@@ -141,8 +141,9 @@
     background-color: rgb(22, 24, 29) !important;
 }
 
-.arduino-article code {
+.dark .arduino-article code {
     color: black;
+    background-color: rgb(22, 24, 29) !important;
 }
 
 .language-cpp {
