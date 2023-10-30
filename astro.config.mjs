@@ -11,5 +11,5 @@ export default defineConfig({
     integrations: [react(), tailwind(), mdx()],
     output: "server",
     adapter: vercel(),
-    trailingSlash: "always",
+    trailingSlash: "never",
 });
