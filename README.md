@@ -46,7 +46,6 @@ La web ha sido desarrollada por [@AitorMelero](https://github.com/AitorMelero) y
 [![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)](https://es.react.dev/)
 [![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![MDX](https://img.shields.io/badge/MDX-1B1F24?logo=mdx&logoColor=white)](https://https://mdxjs.com/)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
 <!-- INSTALACION Y EJECUCION -->
 
@@ -74,24 +73,6 @@ npm run dev -- --host
 
 ```bash
 npm run build
-```
-
-### Levantar web con Docker
-
-```bash
-docker compose up
-```
-
-### Eliminar contenedor Docker
-
-```bash
-docker compose down
-```
-
-### Eliminar contenedor e imágenes Docker
-
-```bash
-docker compose down --rmi all
 ```
 
 ## Escribir artículos
