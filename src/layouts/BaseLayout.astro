@@ -1,0 +1,81 @@
+---
+import MainContentLayout from "./MainContentLayout.astro";
+import MenuMobileLayout from "./MenuMobileLayout.astro";
+import { Header } from "../components";
+import "../styles/global.css";
+import "../styles/prism.css";
+
+const { pageTitle } = Astro.props;
+const allPosts = await Astro.glob("../pages/posts/*.mdx");
+const { pathname } = Astro.url; // current pathname
+
+// Sort posts by date
+allPosts.sort(function (a, b) {
+    const dateA = new Date(a.frontmatter.pubDate).getTime();
+    const dateB = new Date(b.frontmatter.pubDate).getTime();
+    return dateA - dateB;
+});
+
+// Get all posts with format
+const allPostsReferences = allPosts.map(function (post, index) {
+    let previousPost = null;
+    let nextPost = null;
+
+    // Get the previous and next post URL
+    if (index > 0) {
+        previousPost = {
+            url: allPosts[index - 1].url,
+            title: allPosts[index - 1].frontmatter.title,
+        };
+    }
+    if (index < allPosts.length - 1) {
+        nextPost = {
+            url: allPosts[index + 1].url,
+            title: allPosts[index + 1].frontmatter.title,
+        };
+    }
+
+    return {
+        url: post.url,
+        title: post.frontmatter.title,
+        previousPost,
+        nextPost,
+    };
+});
+// Get all posts links
+const postsReferences = allPosts.find((post) => post.url === pathname)
+    ?.frontmatter.sections;
+---
+
+<!doctype html>
+<html lang="en" class="bg-gray-800 font-sans h-full">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/arduino-logo.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+    </head>
+    <body
+        class="h-full bg-white dark:bg-gray-1 text-gray-2 dark:text-white overflow-hidden"
+    >
+        <Header client:load pageTitle={pageTitle} />
+
+        <MainContentLayout
+            allPostsReferences={allPostsReferences}
+            postsReferences={postsReferences}
+        >
+            <slot />
+        </MainContentLayout>
+
+        <MenuMobileLayout allPostsReferences={allPostsReferences} />
+
+        <script>
+            import "../scripts/theme.js";
+            import "../scripts/prism.js";
+            import "../scripts/actionByPathname.js";
+            import "../scripts/dynamicStylesScroll.js";
+        </script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+---
+import Profile from "../../components/Profile.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const pageTitle = "Arduino Project";
+
+// Aitor Profile Info
+const AITOR_NAME = "Aitor Melero";
+const AITOR_IMAGE = "/about/aitor.png";
+const AITOR_DESC =
+    "Aitor, graduado en Ingeniería Informática por la Universidad Autónoma de Madrid, es un apasionado desarrollador web que encuentra su motivación en la creación de aplicaciones y la expresión de su creatividad a través del código. Su constante formación y su habilidad para transformar ideas en soluciones digitales son el reflejo de cada proyecto que nace de su mano.";
+const AITOR_GITHUB = "https://github.com/AitorMelero";
+const AITOR_LINKEDIN =
+    "https://www.linkedin.com/in/aitor-melero-pic%C3%B3n-678105293/";
+
+// Ben Profile Info
+const BEN_NAME = "Benjamín Martín";
+const BEN_IMAGE = "/about/ben.jpeg";
+const BEN_DESC =
+    "Benjamín, ingeniero superior de Telecomunicación graduado en la Universidad Autónoma de Madrid (rama de electrónica). Siempre con mucho interés en la tecnología, la electrónica y el Software, y con muchas ganas de crecer en el área de la Telecomunicación. Su principal objetivo es crear un impacto positivo y dejar huella en todo aquello que le apasiona.";
+const BEN_GITHUB = "https://github.com/mg-ben";
+const BEN_LINKEDIN =
+    "https://www.linkedin.com/in/benjam%C3%ADn-mart%C3%ADn-g%C3%B3mez-60a8ab271/";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <header>
+        <h1 class="text-center">¿Quiénes somos?</h1>
+    </header>
+
+    <section class="w-full h-auto">
+        <!-- Aitor's profile -->
+        <Profile
+            name={AITOR_NAME}
+            imageUrl={AITOR_IMAGE}
+            description={AITOR_DESC}
+            gitHubUrl={AITOR_GITHUB}
+            linkedInUrl={AITOR_LINKEDIN}
+            isStyleReverse={false}
+        />
+
+        <hr />
+
+        <!-- Ben's profile -->
+        <Profile
+            name={BEN_NAME}
+            imageUrl={BEN_IMAGE}
+            description={BEN_DESC}
+            gitHubUrl={BEN_GITHUB}
+            linkedInUrl={BEN_LINKEDIN}
+            isStyleReverse={true}
+        />
+    </section>
+</BaseLayout>

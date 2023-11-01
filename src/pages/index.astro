@@ -1,0 +1,40 @@
+---
+import { ArduinoLogo } from "../components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/mainPage.css";
+
+const pageTitle = "Arduino Project";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <section class="flex flex-col justify-center">
+        <header class="flex flex-col items-center my-5">
+            <h1>Arduino Project</h1>
+            <quote class="text-lg">por AiBenTor</quote>
+        </header>
+
+        <hr />
+
+        <article class="main-article">
+            <p>
+                ¡Bienvenidos a nuestro emocionante rincón dedicado a Arduino! Ya
+                seas un entusiasta de la tecnología, un principiante curioso o
+                un experto, este es tu destino. Explora el universo de Arduino,
+                la plataforma que ha revolucionado la interacción entre lo
+                digital y lo físico. A través de proyectos emocionantes, te
+                guiaremos en el descubrimiento de cómo dar vida a tus ideas
+                electrónicas: sensores, actuadores, IoT, domótica y mucho más.
+            </p>
+
+            <div
+                class="flex row justify-center mt-10 grow-0 items-center text-center mx-5"
+            >
+                <ArduinoLogo width={120} height={120} client:load />
+            </div>
+
+            <p class="font-bold text-blue-3 text-3xl mt-10">
+                ¡Únete a nosotros en este apasionante viaje!
+            </p>
+        </article>
+    </section>
+</BaseLayout>

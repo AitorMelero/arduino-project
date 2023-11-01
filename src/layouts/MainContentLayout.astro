@@ -1,0 +1,69 @@
+---
+import Sidebar from "../components/Sidebar.astro";
+import { Footer, NextPreviousSection } from "../components";
+
+const { allPostsReferences, postsReferences } = Astro.props;
+
+// Search the current blog
+const { pathname } = Astro.url; // current pathname
+const currentPost = allPostsReferences.find((post) => post.url === pathname);
+// Get the previous and next blog
+const previousPost = currentPost?.previousPost;
+const nextPost = currentPost?.nextPost;
+
+// Dynamic styles if right menu exists or not
+const mainContentColumns = postsReferences
+    ? "2xl:grid-cols-[20rem_auto_20rem]"
+    : "";
+const menuRightStyles = postsReferences
+    ? "hidden 2xl:flex 2xl:flex-col 2xl:pb-16 2xl:pr-[30px] 2xl:hover:pr-5 2xl:sticky overflow-y-hidden 2xl:hover:overflow-y-scroll 2xl:max-h-[calc(100vh-6rem)] 2xl:flex-1"
+    : "hidden";
+const articleContainerStyles = postsReferences ? "" : "lg:pr-11";
+---
+
+<main
+    id="main-content"
+    class={"h-[calc(100%-6rem)] w-full grid lg:grid-cols-[20rem_auto] overflow-y-auto absolute top-[96px] " +
+        mainContentColumns}
+>
+    <Sidebar
+        id="left-menu"
+        allReferences={allPostsReferences}
+        classStyles="hidden lg:flex lg:flex-col lg:pb-16 lg:pr-[30px] lg:hover:pr-5 lg:sticky overflow-y-hidden lg:hover:overflow-y-scroll lg:max-h-[calc(100vh-6rem)] lg:flex-1 border-r-2 border-gray-4 dark:border-gray-3"
+    />
+
+    <div
+        id="arduino-article-container"
+        class={"flex flex-col justify-between w-full h-full flex-1 overflow-y-auto px-5 " + articleContainerStyles}
+    >
+        <article
+            id="arduino-article"
+            class="arduino-article md:px-12 pb-5 min-h-80"
+        >
+            <slot />
+        </article>
+        <div>
+            {
+                previousPost || nextPost ? (
+                    <hr class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3" />
+                ) : (
+                    <div />
+                )
+            }
+            <NextPreviousSection
+                client:load
+                previousPost={previousPost}
+                nextPost={nextPost}
+            />
+            <hr class="mt-4 mb-2 border-b border-gray-4 dark:border-gray-3" />
+            <Footer client:load />
+        </div>
+    </div>
+
+    <Sidebar
+        id="right-menu"
+        allReferences={postsReferences}
+        classStyles={menuRightStyles}
+        title={postsReferences ? "En esta página" : ""}
+    />
+</main>

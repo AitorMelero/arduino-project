@@ -1,0 +1,446 @@
+---
+mdxOptions: { format: "md" }
+layout: "../../layouts/MarkdownProjectLayout.astro"
+title: "Sensor de temperatura y control de ventilación"
+pubDate: 2023-10-29
+description: "Sensor de temperatura y muestra de datos en el display junto con control de velocidad de ventilador"
+author: "Benjamín Martín Gómez"
+sections:
+    [
+        { url: "proyecto-1#proyecto-1", title: "Resumen" },
+        { url: "proyecto-1#componentes-requeridos", title: "Componentes requeridos" },
+        { url: "proyecto-1#introduccion-de-componentes", title: "Introducción de componentes" },
+        { url: "proyecto-1#dht11", title: "Módulo sensor de temperatura y humedad DHT11" },
+        { url: "proyecto-1#74hc595", title: "Chip DIP Integrated Circuit 74HC595 Shift Register" },
+        { url: "proyecto-1#display7segmentos4digitos", title: "Display 7 segmentos de 4 dígitos" },
+        { url: "proyecto-1#fanblade", title: "Fan Blade y 3-6V Motor" },
+        { url: "proyecto-1#conexion", title: "Conexión" },
+        { url: "proyecto-1#esquema", title: "Esquema" },
+        { url: "proyecto-1#diagrama-de-cableado", title: "Diagrama de cableado" },
+        { url: "proyecto-1#codigo", title: "Código" },
+        { url: "proyecto-1#imagen-de-ejemplo", title: "Imagen de ejemplo" }
+    ]
+---
+
+import CodeContainer from "../../components/CodeContainer.astro";
+export const components = { code: CodeContainer };
+
+<div id="proyecto-1">
+
+# {frontmatter.title}
+
+El primer proyecto que se realizará en Arduino consiste en actuar sobre un *Display 7 segmentos de 4 dígitos* para mostrar el valor de temperatura sensada por el módulo DHT11 (sensor de temperatura y humedad). Como se explicará en las secciones posteriores, el módulo sensor DHT11 transformará la magnitud física de temperatura en una señal de tensión que posteriormente se codificará para que la salida del sensor sea un valor binario emitido en serie que representa la temperatura o humedad sensada. Este valor binario será leído con Arduino UNO R3, de modo que desde Arduino sea posible enviar dicho valor a un *Display 7 segmentos de 4 dígitos* para finalmente mostrar el valor de temperatura. Adicionalmente, en función de la temperatura, se activará un motor para hacer girar el ventilador *Fan Blade* con una velocidad proporcional a la temperatura sensada (a mayor temperatura, mayor velocidad).
+
+-   [Componentes requeridos](#componentes-requeridos)
+-   [Introducción de componentes](#introduccion-de-componentes)
+    -   [Módulo sensor de temperatura y humedad DHT11](#dht11)
+    -   [Chip DIP Integrated Circuit 74HC595 Shift Register](#74hc595)
+    -   [Display 7 segmentos de 4 dígitos](#display7segmentos4digitos)
+    -   [Fan Blade y 3-6V Motor](#fanblade)
+-   [Conexión](#conexion)
+    -   [Esquema](#esquema)
+    -   [Diagrama de cableado](#diagrama-de-cableado)
+-   [Código](#codigo)
+-   [Imagen de ejemplo](#imagen-de-ejemplo)
+
+---
+
+</div>
+
+
+<div id="componentes-requeridos">
+
+## Componentes requeridos
+
+-   (1) Módulo sensor de temperatura y humedad DHT11.
+-   (1) Chip DIP Integrated Circuit [74HC595 Shift register](https://www.alldatasheet.com/datasheet-pdf/pdf/12198/ONSEMI/74HC595.html).
+-   (1) Display 7 segmentos de 4 dígitos.
+-   (1) Fan Blade and 3-6V Motor.
+
+---
+
+</div>
+
+
+<div id="introduccion-de-componentes">
+
+## Introducción de componentes
+
+</div>
+
+
+<div id="dht11">
+
+### Módulo sensor de temperatura y humedad DHT11
+
+![Módulo sensor de temperatura y humedad DHT11](/posts/proyecto-1/dht11.png)
+
+El Módulo sensor de temperatura y humedad DHT11 es un dispositivo que traduce la magnitud física de la temperatura y humedad en una salida digital emitida en serie.
+
+<br></br>
+
+Típicamente, los sensores son dispositivos que transforman magnitudes físicas (como desplazamientos, fuerza, intensidad lumínica, campo electromagnético o temperatura, entre muchos otros) en señales analógicas de tensión que puedan ser tratadas y procesadas circuitalmente. Este mapeo magnitud-tensión suele especificarse por parte del fabricante a través de la curva de calibración, que consiste en una representación gráfica utilizando como eje vertical la salida de tensión del sensor y como eje horizontal la magnitud física en cuestión. A continuación, la salida analógica de tensión puede ser acondicionada utilizando un circuito de acondicionamiento (para, por ejemplo, amplificarla si es necesario o eliminar ruido en la señal). Finalmente, dado que un ordenador requiere datos binarios, es necesario aplicar una transformación analógico-digital mediante un [conversor A/D](https://es.wikipedia.org/wiki/Conversor_de_se%C3%B1al_anal%C3%B3gica_a_digital). Para que el conversor A/D pueda transformar un valor analógico (esto es, un valor que puede tener infinitos decimales) a un valor digital (es decir, un valor con una resolución finita), es necesario que el conversor divida el rango posible de entrada analógica en un conjunto de rangos (por ejemplo, si la tensión que recibe está entre 0 voltios y 5 voltios, podrá dividir el rango [0, 5] v en 256 regiones de cuantificación: [0, 0.019], [0.019, 0.038], [0.038, 0.057]... De modo que toda tensión que caiga dentro del primer intervalo tendrá asociado el valor binario 0, para el segundo el 1, para el tercero el 2 y así sucesivamente; este proceso se conoce como cuantificación). La cuantificación implica pérdidas, porque cuando Arduino recibe el valor binario (por ejemplo, el valor 2), no tiene forma de saber exactamente cuál era el valor de tensión, pero sí en qué rango de incertidumbre se encontraba dicho valor, por lo que decidirá el valor medio de ese intervalo para minimizar el error posible (0.0475 v). La lógica del dispositivo que reciba los datos binarios deberá aplicar las transformaciones inversas de cada una de las etapas del sistema completo para obtener el valor de la magnitud física medida por el sensor, asumiendo que existe un cierto error de medida debido a varios factores, entre los que se incluye la cuantificación.
+
+![Sistema completo de sensado](/posts/proyecto-1/sistemacompleto.png)
+
+Adicionalmente, los sensores poseen varias características estáticas que se pueden analizar cuando la magnitud física que se desea sensar no varía demasiado con el tiempo. Estas características son, entre otras, el **Alcance, Span o Fondo de Escala (FS) del sensor** (rango de la magnitud físcia que el sensor es capaz de detectar, pues un sensor de temperatura no funcionará para temperaturas demasiado altas o bajas, sino solo para un rango de éstas) o la **Sensibilidad** (si frente a una variación de la magnitud física se observa una alta variación de la tensión de salida, entonces la curva de calibración tendrá una pendiente elevada o, lo que es lo mismo, el sensor es muy sensible). Otra característica aparte de las estáticas de un sensor es la **resolución** de la cuantificación (los errores en la cuantificación de la tensión se traducen en errores en la medida final de la magnitud: la resolución puede darse como número de bits, es decir, número de regiones de cuantificación, o bien directamente como error en la magnitud final). Finalmente, los sensores típicamente deben ser alimentados con una fuente de tensión (a menos que sean sensores generadores, que no requieren alimentación).
+
+<br></br>
+
+En el caso particular del sensor DHT11, todo el procesamiento del acondicionamiento y conversión A/D ya es realizado internamente por el propio sensor y el módulo en el que se encuentra, por lo que la salida es digital y legible por Arduino a través de un pin digital. Además, el valor de salida del sensor DHT11 es un dato binario que, a diferencia del [esquema global](/posts/proyecto-1/sistemacompleto.png), no representa la tensión de salida del circuto de acondicionamiento, sino directamente la temperatura (o humedad) leída, por lo que no es necesario implementar la lógica para obtener la temperatura (o humedad) aplicando la lógica inversa de cada etapa.
+
+<br></br>
+
+Si se accede al [manual del fabricante del sensor](https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf), será posible comenzar a trabajar con el sensor DHT11 y Arduino. Del manual del fabricante será importante conocer:
+- **La tensión de alimentación**: [3, 5.5] v.
+- **El alcance, Span o Fondo de Escala (FS) del sensor**: el sensor es capaz de detectar [0, 50] ºC para la temperatura y [20, 90] % para la humedad, aunque este último dato depende de las condiciones de temperatura en las que se encuentre el sensor; para nuestra aplicación, se asumirán condiciones normales de temperatura (en torno a 25 ºC), por lo que el rango es de 20 a 90 %.
+- **Cuáles son los pines de alimentación, GND o *Ground* y de salida de datos**.
+- **Otras recomendaciones del fabricante**: por ejemplo, se aconseja utilizar una resistencia de *Pull-up* de valor 5000 &#937; cuando el cable de datos es inferior a 20 metros de longitud. La resistencia de *Pull-up* se utiliza cuando se desea un valor definido para cuando se transmite un 1 lógico (5 voltios); se recuerda que el sensor DHT11 emite en un stream binario el valor de temperatura sensado. Para que Arduino pueda leer este stream binario físicamente, es necesario que exista una señalización; típicamente, 0 voltios para transmitir un 0 y *V<sub>DD</sub>* (valor de la tensión de alimentación) para el 1 (esta señalización se conoce como [TTL, *Transistor-Transistor Logic*](https://www.bing.com/search?q=ttl+signaling&qs=n&form=QBRE&sp=-1&ghc=1&lq=0&pq=ttl+signaling&sc=10-13&sk=&cvid=477633B1F9E64ADFA96D7C2E6AF5C9C6&ghsh=0&ghacc=0&ghpl=)). En este caso, el sensor DHT11 utiliza una configuración [*open collector*](https://en.wikipedia.org/wiki/Open_collector), lo que significa que, internamente, es capaz de emitir estos valores de voltaje conmutando un transistor interno. En esta configuración, para emitir un 0 lógico, basta con activar el transistor interno. Sin embargo, para emitir un 1 lógico, el transistor se debe desactivar y esto implica que el pin de salida quede flotando (no se emite ningún valor de tensión, pues el colector está desconectado). Por esta razón, a la salida se utiliza una fuente de tensión directamente conectada al pin de Arduino, de modo que, cuando se emita un 1 lógico, el pin de salida de DHT11 queda desconectado y, por tanto, pasen 5 voltios a Arduino. Sin embargo, para evitar cortocircuitos (cuando se emite un 0 lógico, una diferencia de tensión de valor *V<sub>DD</sub>* en un cable sin resistencia puede ocasionar corrientes muy elevadas) se utiliza una resistencia de *Pull-up*, de modo que no pasan 5 voltios, sino algo menos debido a la caída de tensión ocasionada por la resistencia. Estas resistencias también pueden ayudar a mantener la integridad de la señal y a mejorar la inmunidad frente a ruido de tensión que pueda ser capturado y acoplado al cable. Más adelante se explicará que, rigurosamente, el sensor DHT11 no utiliza TTL como señalización, sino que, tanto para emitir un 0 lógico como para emitir un 1 lógico, utiliza una señal cuadrada de 0 y *V<sub>DD</sub>* voltios, lo que justifica más la necesidad de emplear una resistencia de *Pull-up*.
+
+<br></br>
+
+Además, del manual del fabricante se puede conocer cómo funciona el sensor:
+1. En primer lugar, Arduino emite una señal de *Start*. Durante el tiempo en el que Arduino emite esta señal al sensor, el sensor DHT11 se configura en *running-mode*. Concretamente, la señal de *Start* consiste en poner en estado *low* (0 lógico) el cable de datos por parte de Arduino durante 18 milisegundos como mínimo para que el sensor DHT11 interprete que Arduino desea recibir datos de sensado. La señal de *Start* finaliza cuando Arduino emite un 1 lógico durante 20-40 microsegundos.
+2. Una vez finalizada la señal de *Start*, el sensor DHT11 emite una señal de respuesta, que consiste en emitir un 0 lógico durante 80 microsegundos y un 1 lógico durante otros 80 microsegundos. Es entonces cuando comienza la transmisión de datos.
+3. El sensor DHT11 emitirá los datos binarios a través de una señalización por anchura de pulso. Concretamente, el símbolo (señal) que representa el estado *low* es un pulso cuadrado en el que los primeros 50 microsegundos se emiten 0 voltios y los siguientes 26-28 microsegundos *V<sub>DD</sub>* voltios. Como se explicó previamente, como el sensor utiliza una configuración *open-drain*, para emitir *V<sub>DD</sub>* voltios, internamente se desactiva el transistor y el pin de salida queda al aire, de modo que Arduino recibe un valor de tensión similar y menor que *V<sub>DD</sub>* debido a la caída de tensión de la resistencia de *Pull-up*. Para emitir un 1 lógico, los primeros 50 microsegundos se emiten 0 voltios y los siguientes 70 microsegundos se emiten los *V<sub>DD</sub>* voltios.
+4. Finalización de la comunicación: el sensor DHT11 emite 0 voltios durante 50 microsegundos y, finalmente, emite *V<sub>DD</sub>* voltios para indicar que está libre para solicitar nuevos datos.
+
+<br></br>
+
+El formato de los datos también es fundamental para comprender cómo leer el valor de temperatura y humedad sensados: en concreto, el fabricante especifica que los datos se transmiten como un stream binario a través de una interfaz serie (esto es, los bits se transmiten en el tiempo uno detrás de otro). Concretamente, los primeros 8 bits hacen referencia a la parte entera del valor de temperatura sensado; los siguientes 8 bits se refieren a la parte entera del valor de humedad sensado; los siguientes 8 bits, la parte decimal de la temperatura; los siguientes 8 bits la parte decimal de la humedad y, por último, los últimos 8 bits se refieren a un valor de *checksum* que sirve para comprobar que los bits no han sido alterados durante la transmisión. Para ello, el emisor y el receptor conocen que el valor de *checksum* es la suma de los bits citados anteriormente. En Arduino podemos realizar esta suma y comprobar que coincide con el valor de *checksum*; si no coincide, los datos han sido modificados durante la transmisión.
+
+<br></br>
+
+Para leer los datos del sensor, sería necesario implementar la lógica en cuestión en el IDE de Arduino. Sin embargo, Arduino cuenta con una librería para ello, por lo que para la aplicación de este proyecto no será necesario llevar a cabo este proceso.
+</div>
+
+
+<div id="74hc595">
+
+### Chip DIP Integrated Circuit 74HC595 Shift Register
+
+![Chip DIP Integrated Circuit 74HC595 *Shift Register*](/posts/proyecto-1/pdip74hc595.png)
+
+Con el objetivo de poder mostrar en el [Display 7 segmentos de 4 dígitos](Display-7-segmentos-de-4-dígitos) el valor de temperatura, será necesario enviar a dicho dispositivo el valor binario que represente dichas magnitudes físicas sensadas por el DHT11. No obstante, el dispositivo *Display 7 segmentos de 4 dígitos* no posee una entrada de datos que pueda interpretar el *stream binario* de forma directa y automáticamente los muestre, sino que sus pines de entrada sirven para configurar, a través de valores de tensión, qué segmentos se encienden y cuáles no para mostrar el valor deseado en el *display*. Esto exige que, de algún modo, sea necesario traducir el valor binario recibido desde el sensor DHT11 a un *stream* binario que indique qué segmentos se deben activar y que pueda interpretar el *display*. Por tanto, es necesario implementar esta lógica mediante Arduino UNO R3.
+
+<br></br>
+
+Suponiendo que esa lógica ya se hubiera implementado, el siguiente paso sería transmitir los datos al *display*. Sin embargo, esta transmisión de datos se debería hacer en paralelo (se transmiten todos los bits al mismo tiempo), ya que el *display* debe recibir al mismo tiempo qué segmentos encender y cuáles no para mostrar un único dígito. En otras palabras, si se transmiten los datos binarios desde Arduino en serie (un bit detrás de otro), no sería posible que el *display* reciba un bit y encienda un segmento concreto, puesto que con un bit no tiene forma de saber qué segmento encender.
+
+<br></br>
+
+Por tanto, desde Arduino es necesario emitir los datos en paralelo, por lo que será necesario extraer los datos desde pines digitales de salida de Arduino. El *display* posee 8 pines de entrada con los que es posible configurar un dígito que mostrar (más 4 pines con los que es posible seleccionar en qué posición de las 4 posibles; primera, segunda, tercera o cuarta), así que extraer un total de 12 pines desde Arduino puede no ser una idea adecuada en estos casos. Por ello, se emplea el **Chip 74HC595 *Shift Register***, que funciona como un conversor serie-paralelo y que es capaz de extraer a su salida hasta 8 bits en paralelo. Los 4 restantes que seleccionan la posición del dígito sí se extraerán de forma directa desde Arduino.
+
+<br></br>
+
+El Chip 74HC595 *Shift Register*, de acuerdo con el [manual del fabricante](https://www.alldatasheet.com/datasheet-pdf/pdf/12198/ONSEMI/74HC595.html), funciona de la siguiente forma:
+
+![Shift Register Logic Diagram](/posts/proyecto-1/shift_register_logic_diagram.png)
+
+1. Recibe el primer bit de un *stream binario* en serie por el pin A de entrada de datos (*Serial Data Input*). El primer bit del *stream* se carga (se queda almacenado) en un *Flip-Flop*. Un *Flip-Flop* es un dispositivo electrónico que permite cargar bits en su entrada de datos de modo que, cuando se activa una señal de reloj (pasa de estado *LOW* a estado *HIGH*), el dato cargado pasa a la salida (y se elimina de la entrada).
+2. Cuando se activa la señal de reloj (*Shift Clock*) del 74HC595, el bit que se había cargado en el registro anterior pasará a la salida, que está conectada a un segundo *Flip-Flop*. Es entonces cuando podemos emitir el segundo bit del stream, que será cargado en el primer *Flip-Flop*.
+3. Nuevamente, se activa la señal de reloj *Shift Clock*. De esta manera, los bits se irán desplazando hasta haber logrado cargar en cada *Flip-Flop* los bits que se desean emitir en paralelo. Observe que el primer bit del *stream binario* acabará en el último registro (SR<sub>H</sub>).
+4. Una vez cargados los 8 bits, se activa la señal de reloj *Latch Clock* para extraer en paralelo los bits cargados por las salidas Q<sub>A-H</sub>, que irán conectadas a las entradas del *Display 7 segmentos de 4 dígitos*. Observe que el primer bit del *stream* saldrá por el último pin Q<sub>H</sub>.
+
+Adicionalmente, es importante destacar que el dispositivo 74HC595 cuenta con un pin *Output Enable* que se debe activar para permitir la salida de datos en paralelo. Este pin es activo a nivel bajo (lo que quiere decir que se considera que está activo y permite la salida de datos cuando recibe un 0 lógico), por lo que se deberá conectar a GND. Por su parte, el pin de salida de datos serie (SQ<sub>H</sub>) y el pin de *Reset* se dejarán sin conectar.
+
+</div>
+
+
+<div id="display7segmentos4digitos">
+
+### Display 7 segmentos de 4 dígitos
+
+El dispositivo *Display 7 segmentos de 4 dígitos* es un dispositivo electrónico que sirve para mostrar caracteres cualesquiera que puedan formarse a través de la combinación de encendido de los diferentes segmentos que posee. Existen versiones diferentes, cada una con un diferente número de dígitos posible que se puede mostrar. Para la aplicación de este proyecto, se optará por utilizar del de 4 dígitos: el primero y el segundo (comenzando desde la izquierda) se utilizarán para mostrar la primera y segunda cifra del valor de temperatura (si, por ejemplo, el valor de temperatura sensado es de 25ºC, el primer y segundo dígito serán, respectivamente, el 2 y el 5). El tercer dígito se utilizará para mostrar el símbolo de grados (º) y el cuarto y último se reservará para mostrar el carácter 'C' (Centígrados).
+
+<br></br>
+
+Cabe destacar que cada dígito (o carácter, indistintamente) posee un total de 8 segmentos, nombrados desde la letra 'A' hasta la 'G', más el punto decimal (o DP):
+
+![Segmentos de un dígito](/posts/proyecto-1/segmentosDigito.png)
+
+Por ejemplo, el carácter 'C' se puede mostrar activando la combinación de segmentos A, F, E, D.
+
+<br></br>
+
+Para comprender su funcionamiento, es necesario recurrir al [manual del fabricante del Display 7 segmentos de 4 dígitos](http://www.xlitx.com/Products/7-segment-led-dot-matrix/5641as.html). Será de especial interés el siguiente esquemático:
+
+![Esquema circuital](/posts/proyecto-1/7segments4digitscircuitDiagram.png)
+
+Como se puede observar, cada segmento es, en la práctica, un diodo LED. Estos diodos pueden disponerse en dos modos: ánodo común (cuando todos los ánodos de los diodos comparten un mismo terminal, en este caso en los pines 12, 9, 8 y 6) o cátodo común (cuando, alternativamente, sucede lo mismo pero con los cátodos de los diodos). Según el modelo de fabricación, el *Display 7 segmentos de 4 dígitos* puede ser de un tipo o de otro (en este caso, es del tipo cátodo común).
+
+<br></br>
+
+A partir del esquema circuital, se puede deducir el funcionamiento del *display*:
+- A través de los 8 pines de entrada 11, 7, 4, 2, 1, 10, 5, 3 es posible enviar la tensión adecuada para configurar cómo se encienden los segmentos. Con el pin 11 se controla el segmento A; con el 7, el B; con el 4, el C, y así sucesivamente (con el 3, el punto decimal). Estos pines irán conectados a los pines Q de salida del dispositivo 74HC595 *Shift Register*.
+- A través de los 4 pines de entrada 12, 9, 8, 6 se puede controlar qué dígito se muestra (si el primero, el segundo, el tercero o el cuarto). Sin embargo, no es posible configurar que se muestren todos al mismo tiempo y cada uno con una combinación de segmentos diferente; es decir, si se muestran los cuatro dígitos a la vez, no es posible que cada uno sea un dígito diferente, sino que deben ser el mismo. Por esta razón, la única forma de lograr mostrar dígitos diferentes a la vez es a través de la multiplexación de los dígitos: se enciende el primero con un dígito concreto. A continuación, se apaga y se enciende el segundo con otro dígito concreto. Así sucesivamente y cíclicamente en unidades de alta velocidad para que no sea apreciable por el ojo humano.
+
+<br></br>
+
+Para evitar que los diodos generen una corriente demasiado elevada, se colocará una resistencia que controle el punto de conmutación de los diodos. La novedad es que, en este caso, los diodos están en paralelo y encuentran un nodo común en los pines 12, 9, 8 y 6. Para configurar el punto de conmutación de los diodos y evitar corrientes muy elevadas, se aplicará la [*Ley de Kirchoff* de las corrientes](https://www.electronics-tutorials.ws/dccircuits/kirchhoffs-current-law.html#:~:text=Gustav%20Kirchhoff%E2%80%99s%20Current%20Law%20is%20one%20of%20the,place%20to%20go%20as%20no%20charge%20is%20lost.), que establece que la corriente que se percibe a la salida de cualquiera de los pines de cátodo común (12, 9, 8 o 6) es la suma de las corrientes de cada diodo en cuestión:
+
+![Cálculos de la carga para evitar excesos de corriente](/posts/proyecto-1/displayLoadCalculations.png)
+
+Cuando se pretende activar un dígito concreto, se deben alimentar los diodos de los segmentos asociados a ese dígito con un valor de tensión de 5 voltios (que es la salida extraída por el *Shift register*). Por ejemplo, activar el primer dígito implica enviar una tensión de 0 voltios al pin 12 y de 5 voltios al resto de pines 9, 8 y 6, para que, de esta manera, al enviar las tensiones por las entradas de los segmentos (por ejemplo, si se quiere activar una 'C', se deben encender los segmentos A, F, E, D, por lo que por estos pines se enviarán 5 voltios), exista una diferencia de tensión de 5 voltios total (V<sub>s</sub>) en esos diodos, y de 0 voltios en el resto de diodos de ese dígito. Observe que el resto de diodos (del resto de dígitos) perciben una tensión de 0 voltios (rodeados de color rojo) o de -5 voltios, por lo que no se encenderán al no estar en estado de conducción:
+
+![Ejemplo para mostrar una C en el primer dígito del display 7 segmentos de 4 dígitos](/posts/proyecto-1/7segments4digitexample.png)
+
+En el caso de que el diodo reciba una tensión de 5 voltios, existe un riesgo de que la corriente sea excesiva y el diodo se queme. Por esta razón, se calculará la resistencia sobre este escenario (V<sub>s</sub> = 5 voltios). El desarrollo queda como:
+
+![Cálculo de la resistencia de carga para evitar sobrecorriente](/posts/proyecto-1/currentcontrolloadformula.png)
+
+Donde N es el número de ramas (en este caso, N = 8). Para calcular R, finalmente se elige el punto de conmutación de los diodos en base a la curva característica de los mismos, presente en el manual del fabricante del *Display 7 segmentos de 4 dígitos*. 
+
+![Curva característica del diodo del Display 7 segmentos](/posts/proyecto-1/characteristicDiode7segments4digitdisplay.png)
+
+Por ejemplo, se puede escoger el punto (V<sub>D</sub> = 1.7 v, i<sub>D</sub> = 5 mA). Fijando estos valores, el cálculo de R queda como 82.5 &#937;. Por ejemplo, se puede utilizar una resistencia de 100 &#937;, pues no se dispone una con el valor exacto resultante del cálculo.
+
+</div>
+
+
+<div id="fanblade">
+
+### Fan Blade and 3-6V Motor
+
+El último dispositivo del sistema completo de sensado es el Fan Blade and 3-6V Motor. Este dispositivo únicamente posee un pin analógico de entrada para alimentación del motor y otro pin de GND.
+
+![Fan Blade y 3-6V Motor](/posts/proyecto-1/fanblade.jpg)
+
+Para activar el motor, se enviará una [señal modulada con PWM](https://docs.arduino.cc/learn/microcontrollers/analog-output) a través de un pin analógico de salida de Arduino UNO R3. Los pines analógicos de Arduino UNO R3 permiten enviar un valor entre 0 y 255, esto es, un valor entero de 8 bits. En realidad, desde Arduino no es posible extraer un valor concreto de tensión (por ejemplo, 2 voltios, 3 voltios o cualquier otro que sea diferente de 0 o 5 voltios), sino que, para extraer 2 voltios, se envía una señal cuadrada y periódica que consiste en que en una porción de tiempo se emiten 5 voltios y en otra porción de tiempo se emiten 0 voltios tal que la porción de tiempo sea la adecuada para que, realizando la media en el período completo, el valor de tensión sea el deseado (2 voltios, 3 voltios o cualquier otro valor de tensión). Esta porción de tiempo se puede ajustar mediante 8 bits: así, el dígito binario 00000000 equivale a 0 voltios, 00000001 equivale a 5/256 voltios, 00000010 equivale a 2*5/256 voltios y así sucesivamente.
+
+<br></br>
+
+El dispositivo *Fan Blade and 3-6V Motor* recibe una tensión analógica y, en función de su valor, el ventilador funcionará a mayor o menor velocidad (revoluciones). Para este proyecto, se desea que, cuando el sensor reciba el mínimo valor de temperatura que es capaz de captar (0 ºC), el ventilador esté quieto y, cuando se reciba el máximo valor (5 ºC), el ventilador funcione al máximo valor posible de velocidad (esto es, la señal analógica ha de ser 255). Por tanto, es posible expresar el valor analógico que se debe enviar al motor en función de la temperatura sensada como (255/50)*T, esto es, el valor analógico que se debe enviar desde Arduino al sistema del ventilador debe ser 5.1 veces el valor de temperatura sensada. Como se puede intuir, este ventilador irá directamente conectado a Arduino, y no se requiere ningún dispositivo intermedio.
+
+---
+
+</div>
+
+
+<div id="conexion">
+
+## Conexión
+
+</div>
+
+<div id="esquema">
+
+### Esquema
+
+El esquema del sistema completo se muestra a continuación:
+![Esquema en papel del sistema completo](/posts/proyecto-1/esquema.jpg)
+
+El sensor DHT11 enviará la información de temperatura sensada como un *stream* binario que será leído en un pin digital de Arduino UNO R3. Los datos leídos se transmiten en serie hacia el *Shift Register*, que los convertirá en paralelo con el formato correspondiente para activar los segmentos en el *Display 7 segmentos de 4 dígitos* y así mostrar el dígito adecuado. Mediante los bits de selección que salen de Arduino se podrá seleccionar qué dígito se va a mostrar. Esta acción se repite varias veces a alta velocidad para generar la ilusión de que se muestran todos los dígitos al mismo tiempo. Al mismo tiempo, se activa mediante un pin analógico de salida un ventilador cuya velocidad es directamente proporcional con la temperatura sensada; a mayor temperatura, mayor velocidad.
+
+</div>
+
+<div id="diagrama-de-cableado">
+
+### Diagrama de cableado
+
+A continuación, se muestra el diagrama de simulación del sistema completo con el [simulador Web de Arduino](https://wokwi.com/):
+![Arduino Web Simulator diagrama de cableado](/posts/proyecto-1/arduinowebsimulator.png)
+
+---
+
+</div>
+
+
+<div id="codigo">
+
+## Código
+
+El algoritmo que se ejecuta de forma indefinida (dentro del *loop*) en Arduino se explica a continuación:
+
+1. Leer datos del sensor DHT11. Para ello, se implementará la librería propia del sensor como `#include <DHT11.h>` en el inicio del código y, a continuación, se especifica en qué pin digital de Arduino UNO R3 se reciben los datos del sensor en cuestión (por ejemplo, el 2) `DHT11 dht11(2);`. Para leer un dato del sensor, se utilizará el método *readTemperature* como:
+
+```
+temperature = dht11.readTemperature();
+```
+
+2. Comprobar que el dato leído es válido. Se recuerda que existe un *Checksum* en el contenido binario de los datos leídos con los que es posible comprobar que el sensor ha capturado correctamente los datos. Para ello, podemos utilizar las constantes `DHT11::ERROR_CHECKSUM` y `DHT11::ERROR_TIMEOUT` definidas en la librería del sensor DHT11 contra las que es posible comparar directamente el valor de temperatura sensado:
+
+```
+if(temperature != DHT11::ERROR_CHECKSUM && temperature != DHT11::ERROR_TIMEOUT)
+```
+
+3. En caso de ser válido el valor de temperatura, se muestra el valor en el *Display*: concretamente, primero se selecciona el dígito activo y después se envía el *stream* binario al *Shift Register* con el contenido que mostrar. Para ello:
+
+    3.1. Se envían los 0 y 5 voltios a los pines de selección de dígito del *Display 7 segmentos de 4 dígitos*. Para ello, se especifica con Arduino qué pines digitales van conectados a estos pines de selección de dígito. Por ejemplo, pueden ser los pines 3, 4, 5 y 6 de salida digital de Arduino:
+
+    ```
+    int digit_display_pins[4] = {3, 4, 5, 6};
+    ```
+
+    3.2. Se selecciona el primer dígito: es decir, se envían 0 voltios ('0' lógico) al pin del primer dígito del display y 5 voltios al resto.
+
+    ```
+    digitalWrite(digit_display_pins[0], 0);
+    digitalWrite(digit_display_pins[1], 1);
+    digitalWrite(digit_display_pins[2], 1);
+    digitalWrite(digit_display_pins[3], 1);
+    ```
+
+    Con esto, ya sería posible enviar los datos de temperatura al display. Concretamente, se enviará el primer dígito, pues se acaba de activar para ser mostrado. Suponiendo que el valor de temperatura sensado es de 25ºC, se deberá enviar el dígito 2. Concretamente, se enviarán los segmentos que se deben encender al *Shift Register* como un *stream binario*.
+
+    3.2. Se especifica el pin de salida de Arduino por el que se enviarán datos al *Shift Register*. También se especifica el pin por el que se enviarán datos a las señales de reloj (*Shift CLK* y *Latch CLK*).
+
+    ```
+    #define data_pin 7
+    #define latch_clk 12
+    #define shift_clk 13
+    ```
+
+    3.3. Enviar el *stream binario* al *Shift Register* por el pin de datos (7). Cuando se trata de enviar datos binarios en serie, se puede configurar si se envía primero el bit más significativo (es decir, el de la izquierda) o el menos significativo. La elección dependerá de cómo se haya conectado el *Shift Register* con el *Display 7 segmentos de 4 dígitos* y sabiendo que el primer bit emitido será el que saldrá por Q<sub>H</sub> como se explicó con anterioridad. En este caso, se escogerá en orden MSB (*Most Significant Bit First*). Para ello, se utilizará el método *shiftOut*. Es posible definir el *stream binario* como un valor entero. Por ejemplo, el dígito '2' exige encender los segmentos A, B, G, E y D. Por tanto, el *stream binario* debe ser 01011011 (DP = 0, G = 1, F = 0..., aunque también se puede definir al revés y enviar los datos en *LSB First*), que en el sistema numérico decimal equivale al 91. Antes del envío de datos se debe desactivar el reloj *Latch CLK*:
+
+    ```
+    int binary_stream = 91;
+    digitalWrite(latch_clk, LOW);
+    shiftOut(data_pin, shift_clk, MSBFIRST, binary_stream);
+    digitalWrite(latch_clk, HIGH);
+    ```
+
+    3.4. Apagar el dígito recientemente encendido: esto se debe realizar tras un ligero tiempo de espera, ya que, de no ser así, el tiempo durante el que se se muestra el dígito es tan reducido que no se aprecia su valor. Por ello, se implementa un delay de 5 milisegundos:
+
+    ```
+    delay(5);
+    int binary_stream = 0;
+    digitalWrite(latch_clk, LOW);
+    shiftOut(data_pin, shift_clk, MSBFIRST, binary_stream);
+    digitalWrite(latch_clk, HIGH);
+    ```
+
+    3.5. Repetir el paso 3.2., pero modificando el dígito que mostrar y el valor del dígito con el segundo carácter del valor de temperatura (para 25ºC, sería el 5). Si ya se ha terminado de mostrar todos los caracteres del valor sensado ("25ºC", por ejemplo), es posible volver a mostrar los mismos caracteres repitiendo el paso 3.2. con el primer carácter mediante un bucle 100 veces. De esta manera, se mostrará durante unos pocos segundos el valor antes de proceder a capturar un nuevo valor por el sensor, que funciona a alta velocidad.
+
+4. Si el valor de temperatura sensado (ejemplo: 25ºC) cambia con respecto al anterior (por ejemplo, se puede llevar un registro del último valor sensado), se actualiza la velocidad del ventilador. Para ello, se implementa la fórmula `int speed = (int)5.1*temperature;` para calcular el valor analógico que debe percibir el motor del ventilador para que su velocidad cumpla con los requisitos citados en el diseño del proyecto. El código queda como:
+
+```
+#define motorShieldpin 11
+int temperature_was;
+int temperature;
+...
+void setup()
+{
+    ...
+    temperature_was = 0; //Se inicializa su valor a 0
+}
+
+void loop(){
+    temperature = dht11.readTemperature();
+    if(temperature != DHT11::ERROR_CHECKSUM && temperature != DHT11::ERROR_TIMEOUT){
+      displayValueIn7Segments(String(temperature));
+        if(temperature != temperature_was){
+          int speed = (int)5.1*temperature;
+          analogWrite(motorShieldpin, speed);
+        }
+    }
+}
+```
+
+El código completo se muestra a continuación:
+
+```
+#include <DHT11.h>
+
+#define data_pin 7
+#define latch_clk 12
+#define shift_clk 13
+#define motorShieldpin 11
+
+DHT11 dht11(2);
+
+#define FILAS 13
+#define COLUMNAS 8
+int digit_map[FILAS] = {
+  63, // 0
+  6,  // 1
+  91, // 2
+  79, // 3
+  102, // 4
+  109, // 5
+  125, // 6
+  7,  // 7
+  255, // 8
+  111, // 9
+  99, // º
+  57, // C
+  0   // Clean
+};
+
+int digit_display_pins[4] = {3, 4, 5, 6};
+int digit[4] = {0, 0, 0, 0};
+
+int temperature_was;
+int temperature;
+
+void setup()
+{
+    pinMode(data_pin, OUTPUT);
+    pinMode(latch_clk, OUTPUT);
+    pinMode(shift_clk, OUTPUT);
+    pinMode(motorShieldpin, OUTPUT);
+    for(int i = 0; i <= 3; i++){
+      pinMode(digit_display_pins[i], OUTPUT);
+    }
+    Serial.begin(9600);
+    temperature_was = 0;
+}
+
+void printDigit(int digit, int* digit_index){
+  for(int i = 0; i <= 3; i++){
+    digitalWrite(digit_display_pins[i], 1-digit_index[i]);
+  }
+
+  digitalWrite(latch_clk, LOW);
+  shiftOut(data_pin, shift_clk, MSBFIRST, digit_map[digit]);
+  digitalWrite(latch_clk, HIGH);
+  delay(5);
+  digitalWrite(latch_clk, LOW);
+  shiftOut(data_pin, shift_clk, MSBFIRST, digit_map[12]);
+  digitalWrite(latch_clk, HIGH);
+}
+
+void displayValueIn7Segments(String value){
+  for(int i = 0; i <= 99; i++){
+    int digit_index[4] = {1, 0, 0, 0};
+    printDigit(int(value[0] - '0'), digit_index);
+    digit_index[0] = 0; digit_index[1] = 1;
+    printDigit(int(value[1] - '0'), digit_index);
+    digit_index[1] = 0; digit_index[2] = 1;
+    printDigit(10, digit_index);
+    digit_index[2] = 0; digit_index[3] = 1;
+    printDigit(11, digit_index);
+  }
+}
+
+void loop()
+{
+    temperature = dht11.readTemperature();
+    if(temperature != DHT11::ERROR_CHECKSUM && temperature != DHT11::ERROR_TIMEOUT){
+      displayValueIn7Segments(String(temperature));
+        if(temperature != temperature_was){
+          int speed = (int)5.1*temperature;
+          analogWrite(motorShieldpin, speed);
+        }
+    }
+    else{
+      Serial.print("Temperature Reading Error: ");
+      Serial.println(DHT11::getErrorString(temperature));
+    }
+}
+```
+
+---
+
+</div>
+
+
+<div id="imagen-de-ejemplo">
+
+## Imagen de ejemplo
+
+![Funcionamiento completo](/posts/proyecto-1/demostracion.gif)
+
+_por {frontmatter.author}_
+
+</div>

@@ -1,0 +1,167 @@
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(64, 71, 86, 0.3);
+    border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: rgba(64, 71, 86, 1);
+}
+
+.arduino-article {
+    color: rgb(35, 39, 47);
+}
+
+.dark .arduino-article {
+    color: rgb(246, 247, 249);
+}
+
+.arduino-article ~ p {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.arduino-article h1 {
+    line-height: 1.25;
+    font-weight: 700;
+    font-size: 40px;
+    overflow-wrap: break-word;
+    margin-top: 0;
+    margin: 0;
+    padding-top: 1.25rem;
+}
+
+.arduino-article h1 + p {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.625;
+    margin-block-end: 1em;
+    margin-block-start: 1em;
+    margin-inline-end: 0px;
+    margin-inline-start: 0px;
+    overflow-wrap: break-word;
+}
+
+.arduino-article hr {
+    margin-inline-end: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom-width: 1px;
+    border-color: rgb(235 236 240);
+}
+
+.dark .arduino-article hr {
+    border-color: rgba(52, 58, 70, 0.8);
+}
+
+.arduino-article h2 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 2.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    overflow-wrap: break-word;
+    padding-inline-end: 1em;
+    scroll-margin-top: calc(4rem + 20px);
+}
+
+.arduino-article h2 ~ p {
+    display: block;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 30px;
+    margin-block-end: 1em;
+    margin-block-start: 1em;
+    margin-inline-end: 0px;
+    margin-inline-start: 0px;
+    overflow-wrap: break-word;
+}
+
+.arduino-article ul {
+    margin-inline-end: 10px;
+    margin-inline-start: 10px;
+}
+
+.arduino-article li {
+    display: list-item;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.625;
+    list-style-type: disc;
+    margin-bottom: 0.25rem;
+    margin-inline-start: 20px;
+    overflow-wrap: break-word;
+    text-align: -webkit-match-parent;
+}
+
+.arduino-article h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 2.25rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    overflow-wrap: break-word;
+}
+
+.arduino-article a {
+    border-bottom: 1px solid inherit;
+    color: rgb(20, 158, 202);
+    display: inline;
+    line-height: 1.5;
+    text-decoration: inherit;
+}
+
+.arduino-article a:hover {
+    border-bottom: 1px solid rgb(8, 126, 164);
+}
+
+.arduino-article pre {
+    align-items: center;
+    background-color: rgb(255, 255, 255) !important;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    contain: content;
+    display: flex;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 30px;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    overflow-wrap: break-word;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.dark .arduino-article pre {
+    background-color: rgb(22, 24, 29) !important;
+}
+
+.dark .arduino-article code {
+    color: black;
+    background-color: rgb(22, 24, 29) !important;
+}
+
+.language-cpp {
+    color: black !important;
+}
+
+.dark .language-cpp {
+    color: white !important;
+}
+
+.arduino-article img {
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    display: block;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 30px;
+    margin: 2rem auto;
+    overflow-wrap: break-word;
+}
